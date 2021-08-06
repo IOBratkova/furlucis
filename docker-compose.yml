@@ -1,0 +1,37 @@
+version: '3.1'
+
+services:
+
+  pg_db:
+    image: "postgres:11"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: user
+      POSTGRES_DB: handmade
+    ports:
+      - 54329:5432
+    volumes:
+      - pg_handmade:/var/lib/postgresql/data
+
+  pg_db_test:
+    image: "postgres:11"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: serv
+      POSTGRES_USER: user
+      POSTGRES_DB: handmade_test
+    ports:
+      - 54321:5432
+    volumes:
+      - pg_handmade_test:/var/lib/postgresql/data
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+
+volumes:
+  pg_handmade:
+  pg_handmade_test:

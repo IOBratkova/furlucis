@@ -23,7 +23,10 @@ buildscript {
 		classpath("org.jetbrains.kotlin:kotlin-noarg:1.4.30")
 		classpath("com.google.cloud.tools:appengine-gradle-plugin:2.4.1")
 	}
+
 }
+
+
 
 repositories {
 	mavenCentral()
@@ -44,6 +47,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	api("org.mapstruct", "mapstruct", mapStructVersion)
 	kapt("org.mapstruct", "mapstruct-processor", mapStructVersion)
+	testImplementation("org.springframework.boot", "spring-boot-starter-test")
 }
 
 tasks.withType<KotlinCompile> {
