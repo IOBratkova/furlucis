@@ -7,6 +7,8 @@ import furlucis.handmade.mappers.HandmadeTypeMapper
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.junit.jupiter.api.Assertions.assertTrue
+import java.util.stream.IntStream
+import kotlin.streams.toList
 
 
 class HandmadeTypeMapperTest : HandmadeApplicationTests() {
@@ -23,7 +25,7 @@ class HandmadeTypeMapperTest : HandmadeApplicationTests() {
     }
 
     @Test
-    fun `Will map to entity`(){
+    fun `Will map entity to dto`(){
         val entity = createEntity(1L)
 
         val dto = handmadeTypeMapper.toDto(entity)
@@ -34,7 +36,7 @@ class HandmadeTypeMapperTest : HandmadeApplicationTests() {
     }
 
     @Test
-    fun `Will map to dto`(){
+    fun `Will map dto to entity`(){
         val dto = createDto(1L)
 
         val entity = handmadeTypeMapper.toEntity(dto)
@@ -44,5 +46,19 @@ class HandmadeTypeMapperTest : HandmadeApplicationTests() {
         assertTrue(dto.title == entity.title)
     }
 
+
+    @Test
+    fun `Will map list dto to entity`(){
+        val entities = IntStream.range(0, 10).mapToObj { i -> createEntity(i.toLong()) }.toList()
+        val dtos = handmadeTypeMapper.toListDto(entities)
+        dtos.stream().forEach { d -> assertTrue(d != null) }
+    }
+
+    @Test
+    fun `Will map list entity to dto`(){
+        val dtos = IntStream.range(0, 10).mapToObj { i -> createDto(i.toLong()) }.toList()
+        val entityes = handmadeTypeMapper.toListEntity(dtos)
+        entityes.stream().forEach { d -> assertTrue(d != null) }
+    }
 
 }
