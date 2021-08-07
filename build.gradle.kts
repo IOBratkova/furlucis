@@ -32,22 +32,35 @@ repositories {
 	mavenCentral()
 }
 
+val springDocVersion by extra("1.5.5")
 val mapStructVersion by extra("1.4.2.Final")
+val jwtVersion by extra("0.11.2")
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.liquibase:liquibase-core")
 	runtimeOnly("org.postgresql:postgresql")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
 	api("org.mapstruct", "mapstruct", mapStructVersion)
 	kapt("org.mapstruct", "mapstruct-processor", mapStructVersion)
 	testImplementation("org.springframework.boot", "spring-boot-starter-test")
+
+	implementation("com.fasterxml.jackson.module", "jackson-module-kotlin")
+	implementation("io.jsonwebtoken", "jjwt-api", jwtVersion)
+	runtimeOnly("io.jsonwebtoken", "jjwt-impl", jwtVersion)
+	runtimeOnly("io.jsonwebtoken", "jjwt-jackson", jwtVersion)
+
+	implementation("org.springdoc", "springdoc-openapi-kotlin", springDocVersion)
+	implementation("org.springdoc", "springdoc-openapi-ui", springDocVersion)
 }
 
 tasks.withType<KotlinCompile> {
