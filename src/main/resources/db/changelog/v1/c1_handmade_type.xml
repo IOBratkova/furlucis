@@ -10,12 +10,8 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" />
             </column>
-            <column name="title" type="varchar(30)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="description" type="text">
-                <constraints nullable="false"/>
-            </column>
+            <column name="title" type="varchar(30)" />
+            <column name="description" type="text" />
         </createTable>
     </changeSet>
 
