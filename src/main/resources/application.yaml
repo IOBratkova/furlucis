@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_URL:localhost:5432/handmade}
-    username: ${DB_USERNAME:user}}
+    url: jdbc:postgresql://${DB_URL:localhost:54329/handmade}
+    username: ${DB_USERNAME:user}
     password: ${DB_PASSWORD:example}
     driverClassName: org.postgresql.Driver
   jpa:

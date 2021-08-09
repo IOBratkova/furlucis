@@ -4,5 +4,5 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
     <include file="changelog/v1/c1_handmade_type.xml" relativeToChangelogFile="true"/>
-
+    <include file="changelog/v1/c1_user.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
