@@ -49,5 +49,9 @@ data class User(
     val updated: Date? = null,
 
     @Column(name = "avatar")
-    val avatar: String? = null
+    val avatar: String? = null,
+
+    @Column(name = "role", nullable = false)
+    val role: String
+
 )

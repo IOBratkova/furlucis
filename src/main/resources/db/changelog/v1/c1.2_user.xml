@@ -5,7 +5,7 @@
 
     <property name="blob_type" value="bytea" dbms="postgresql"/>
 
-    <changeSet id="07082021" author="bratckova">
+    <changeSet id="07082021-2121" author="bratckova">
         <createTable tableName="user">
             <column name="id" type="uuid">
                 <constraints primaryKey="true"/>
@@ -20,6 +20,7 @@
             <column name="updated" type="datetime" />
             <column name="avatar" type="text" />
             <column name="password" type="varchar(255)"/>
+            <column name="role" type="varchar(10)"/>
         </createTable>
     </changeSet>
 
