@@ -25,19 +25,19 @@ data class User(
     val firstName : String,
 
     @Column(name = "second_name")
-    val secondName : String,
+    val secondName : String?,
 
     @Column(name = "patronymic")
-    val patronymic : String,
+    val patronymic : String?,
 
     @Column(name = "description")
-    val description : String,
+    val description : String?,
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     val password: String,
 
     @Email
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     val email : String,
 
     @CreatedDate

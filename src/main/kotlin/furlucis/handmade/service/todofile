@@ -1,0 +1,8 @@
+    UserServiceImpl:
+
+    override fun getByLogin(login: String): User {
+        val user = userRepo.findByLogin(login)?: throw NullPointerException()
+        return (user ?: null) as User
+    }
+
+    исключение!!!!!!!
