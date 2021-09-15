@@ -14,3 +14,7 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     drop-first: true
+
+jwt:
+  secret: furlucis
+  expiration: 604800000

@@ -34,7 +34,7 @@ data class User(
     val description : String?,
 
     @Column(name = "password", nullable = false)
-    val password: String,
+    var password: String,
 
     @Email
     @Column(name = "email", nullable = false)
