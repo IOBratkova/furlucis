@@ -41,5 +41,10 @@ class FurUserDetails constructor(
         fun create (user: User): FurUserDetails {
             return FurUserDetails(user.login, user.password)
         }
+
+        fun create (login: String, password: String): FurUserDetails {
+            return FurUserDetails(login, password)
+        }
     }
+
 }

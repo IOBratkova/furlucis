@@ -1,7 +1,11 @@
 package furlucis.handmade.rest.v1.auth
 
+import furlucis.handmade.rest.v1.auth.dto.AuthDto
+import furlucis.handmade.rest.v1.auth.dto.TokenDto
+import furlucis.handmade.security.FurUserDetails
 import furlucis.handmade.service.auth.AuthService
 import furlucis.handmade.service.user.UserService
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -12,5 +16,9 @@ class AuthController constructor(
         private val userService: UserService,
         private val authService: AuthService
 ){
-    f
+    @PostMapping("/login")
+    fun login(@RequestBody request: AuthDto) : TokenDto {
+        val result = authService.authenticate(FurUserDetails.create(request.login, request.password))
+        return TokenDto(result)
+    }
 }

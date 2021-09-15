@@ -1,6 +1,7 @@
 package furlucis.handmade.service.auth
 
 import furlucis.handmade.entity.User
+import furlucis.handmade.security.FurUserDetails
 import furlucis.handmade.security.provider.JwtProvider
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationManager
@@ -17,6 +18,17 @@ class AuthServiceImpl @Autowired constructor(
         val authentication = authenticationManager.authenticate(
                 UsernamePasswordAuthenticationToken(
                         credentials.login,
+                        credentials.password
+                )
+        )
+        SecurityContextHolder.getContext().authentication = authentication
+        return jwtProvider.generateToken(authentication)
+    }
+
+    override fun authenticate(credentials: FurUserDetails): String {
+        val authentication = authenticationManager.authenticate(
+                UsernamePasswordAuthenticationToken(
+                        credentials.username,
                         credentials.password
                 )
         )
