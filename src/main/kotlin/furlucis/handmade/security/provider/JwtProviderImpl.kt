@@ -1,59 +1,50 @@
 package furlucis.handmade.security.provider
 
-import furlucis.handmade.security.FurUserDetails
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
+import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Service
+import java.nio.charset.StandardCharsets
 import java.util.*
 
 @Service
 class JwtProviderImpl : JwtProvider {
-    @Value("\${jwt.secret}")
-    private val jwtSecret: String? = null
+    @Value("$(jwt.secret)")
+    private val jwtSecret: String = ""
 
-    @Value("\${jwt.expiration}")
-    private val jwtExpiration: Int = 0
+//    @Value("$(jwt.expiration)")
+    private val jwtExpiration: Int = 604800000
 
-    override fun generateToken(login: String): String {
+
+    override fun generateToken(username: String): String {
         val now = Date()
         val expiryDate = Date(now.time + jwtExpiration)
+        val jwtByte = jwtSecret.toByteArray(StandardCharsets.UTF_8)
+
         return Jwts.builder()
-                .setSubject(login)
+                .setSubject(username)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .signWith(Keys.hmacShaKeyFor(jwtByte), SignatureAlgorithm.HS512)
                 .compact()
     }
 
-    override fun generateToken(authentication: Authentication): String {
-        val now = Date()
-        val expiryDate = Date(now.time + jwtExpiration)
-        val user = authentication.principal as FurUserDetails
-        return Jwts.builder()
-                .setSubject(user.username)
-                .setIssuedAt(Date())
-                .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                .compact()
-    }
-
-    override fun validateToken(authToken: String): Boolean {
+    override fun validateToken(token: String): Boolean {
+        val jwtByte = jwtSecret.toByteArray(StandardCharsets.UTF_8)
+        val jwtParser =  Jwts.parserBuilder().setSigningKey(jwtByte)
         return try {
-            Jwts.parser()
-                    .setSigningKey(jwtSecret)
-                    .parseClaimsJws(authToken)
+            jwtParser.build().parseClaimsJws(token)
             true
         } catch (ex: Exception) {
             false
         }
     }
 
-    override fun getLoginFromToken(token: String): String {
-        val claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .body
-        return claims.subject
+    override fun getUserIdFromToken(token: String): Long {
+        val jwtByte = jwtSecret.toByteArray(StandardCharsets.UTF_8)
+        val jwtParser =  Jwts.parserBuilder().setSigningKey(jwtByte)
+        var claims = jwtParser.build().parseClaimsJws(token).body
+        return claims.subject.toLong()
     }
+
 }

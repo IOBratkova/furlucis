@@ -1,8 +1,9 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
-    <include file="changelog/v1/c1_handmade_type.xml" relativeToChangelogFile="true"/>
-    <include file="changelog/v1/c1_user.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v1/c1.1_handmade_type.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v1/c1.2_user_credentials.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v1/c1.3_user_info.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

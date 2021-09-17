@@ -1,4 +1,4 @@
-package furlucis.handmade.mappers
+package furlucis.handmade.controllers.mappers
 
 interface GenericMapper<E, D> {
     fun toDto(e: E) : D

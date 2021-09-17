@@ -1,27 +1,31 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
     <property name="blob_type" value="bytea" dbms="postgresql"/>
 
     <changeSet id="07082021-2121" author="bratckova">
-        <createTable tableName="user">
-            <column name="id" type="uuid">
-                <constraints primaryKey="true"/>
+        <createTable tableName="user_info">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" />
             </column>
-            <column name="login" type="varchar(30)"/>
             <column name="first_name" type="varchar(30)"/>
             <column name="second_name" type="varchar(30)"/>
             <column name="patronymic" type="varchar(30)"/>
-            <column name="email" type="varchar(30)"/>
             <column name="description" type="varchar(255)"/>
             <column name="created" type="datetime" />
             <column name="updated" type="datetime" />
             <column name="avatar" type="text" />
-            <column name="password" type="varchar(255)"/>
-            <column name="role" type="varchar(10)"/>
+            <column name="user_credentials_id" type="bigint" />
         </createTable>
+
+
+        <addForeignKeyConstraint baseColumnNames="user_credentials_id"
+                                 baseTableName="user_info"
+                                 constraintName="user_credentials_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_credentials"/>
     </changeSet>
 
 </databaseChangeLog>
