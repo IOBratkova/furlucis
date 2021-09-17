@@ -26,12 +26,36 @@ class UserCridentialsServiceImpl @Autowired constructor(
                 }
     }
 
+    override fun findByEmail(email: String): UserCredentials {
+        return userCridentialsRepo.findByEmail(email)
+            .orElseThrow {
+                NullPointerException()
+            }
+    }
+
     override fun findById(id: Long): UserCredentials {
         return userCridentialsRepo.getById(id)
     }
 
     override fun findByUsernameAndPassword(username: String, password: String): UserCredentials {
         val userCridentials = findByUsername(username)
+        return validatePassword(password, userCridentials)
+    }
+
+    override fun findByEmilAndPassword(email: String, password: String): UserCredentials {
+        val userCridentials = findByEmail(email)
+        return validatePassword(password, userCridentials)
+    }
+
+    override fun finsUserByCredentialDate(email: String?, username: String?, password: String): UserCredentials {
+        if (email == null && username == null) {
+            throw NullPointerException()
+        }
+        val userCridentials = if (email == null) findByUsername(username!!) else findByEmail(email)
+        return validatePassword(password, userCridentials)
+    }
+
+    private fun validatePassword(password: String, userCridentials: UserCredentials): UserCredentials {
         if (passwordEncoder.matches(password, userCridentials.password)) {
             return userCridentials
         }

@@ -16,22 +16,22 @@ class JwtProviderImpl : JwtProvider {
 //    @Value("$(jwt.expiration)")
     private val jwtExpiration: Int = 604800000
 
+    private val secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256)
+
 
     override fun generateToken(username: String): String {
         val now = Date()
         val expiryDate = Date(now.time + jwtExpiration)
-        val jwtByte = jwtSecret.toByteArray(StandardCharsets.UTF_8)
 
         return Jwts.builder()
                 .setSubject(username)
                 .setExpiration(expiryDate)
-                .signWith(Keys.hmacShaKeyFor(jwtByte), SignatureAlgorithm.HS512)
+                .signWith(secretKey)
                 .compact()
     }
 
     override fun validateToken(token: String): Boolean {
-        val jwtByte = jwtSecret.toByteArray(StandardCharsets.UTF_8)
-        val jwtParser =  Jwts.parserBuilder().setSigningKey(jwtByte)
+        val jwtParser =  Jwts.parserBuilder().setSigningKey(secretKey)
         return try {
             jwtParser.build().parseClaimsJws(token)
             true
@@ -41,8 +41,7 @@ class JwtProviderImpl : JwtProvider {
     }
 
     override fun getUserIdFromToken(token: String): Long {
-        val jwtByte = jwtSecret.toByteArray(StandardCharsets.UTF_8)
-        val jwtParser =  Jwts.parserBuilder().setSigningKey(jwtByte)
+        val jwtParser =  Jwts.parserBuilder().setSigningKey(secretKey)
         var claims = jwtParser.build().parseClaimsJws(token).body
         return claims.subject.toLong()
     }

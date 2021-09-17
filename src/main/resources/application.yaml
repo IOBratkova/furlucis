@@ -13,8 +13,8 @@ spring:
     url: ${spring.datasource.url}
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
-    drop-first: true
+    drop-first: false
 
 jwt:
-  secret: furlucis
+  secret: FurlucisFurLucisFurLucis
   expiration: 604800000

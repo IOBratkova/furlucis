@@ -42,10 +42,6 @@ class UserPrincipal constructor(
         fun create(user: UserCredentials) : UserPrincipal {
             return UserPrincipal(user.username, user.password, user.id!!)
         }
-
-        fun create (login: String, password: String): FurUserDetails {
-            return FurUserDetails(login, password)
-        }
     }
 
 }
