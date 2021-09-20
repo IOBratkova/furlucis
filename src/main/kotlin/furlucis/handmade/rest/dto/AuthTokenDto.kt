@@ -1,4 +1,4 @@
-package furlucis.handmade.controllers.dto
+package furlucis.handmade.rest.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

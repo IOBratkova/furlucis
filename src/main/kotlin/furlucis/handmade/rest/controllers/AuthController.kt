@@ -1,10 +1,11 @@
-package furlucis.handmade.controllers
+package furlucis.handmade.rest.controllers
 
-import furlucis.handmade.controllers.dto.AuthRequestDto
-import furlucis.handmade.controllers.dto.AuthTokenDto
-import furlucis.handmade.controllers.dto.RegisterResponceDto
-import furlucis.handmade.controllers.dto.RegisterRequestDto
-import furlucis.handmade.controllers.mappers.AuthMapper
+import furlucis.handmade.enums.RoleEnum
+import furlucis.handmade.rest.dto.AuthRequestDto
+import furlucis.handmade.rest.dto.AuthTokenDto
+import furlucis.handmade.rest.dto.RegisterResponceDto
+import furlucis.handmade.rest.dto.RegisterRequestDto
+import furlucis.handmade.rest.mappers.AuthMapper
 import furlucis.handmade.security.provider.JwtProvider
 import furlucis.handmade.service.user.UserCridentialsService
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,6 +23,7 @@ class AuthController @Autowired constructor(
 ) {
     @PostMapping("/registration")
     fun register(@RequestBody request: RegisterRequestDto): RegisterResponceDto {
+//        val userCredentials = authMapper.toUserCredential(request, RoleEnum.USER)
         val userCredentials = authMapper.toUserCredential(request)
         return RegisterResponceDto(userCridentialsService.save(userCredentials).id!!)
     }

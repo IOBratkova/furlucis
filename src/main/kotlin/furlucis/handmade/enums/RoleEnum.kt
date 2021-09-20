@@ -1,6 +1,6 @@
 package furlucis.handmade.enums
 
-enum class Role(val text: String) {
+enum class RoleEnum(val text: String) {
     ADMIN("ADMIN") {
         override fun getCode(): Int = 0
     },
