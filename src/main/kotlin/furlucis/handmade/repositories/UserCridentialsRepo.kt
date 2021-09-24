@@ -9,8 +9,8 @@ import javax.validation.constraints.Email
 
 @Repository
 interface UserCridentialsRepo : JpaRepository<UserCredentials, Long> {
-    fun findByUsername(username: String) : Optional<UserCredentials>
-    fun findByEmail(email: String) : Optional<UserCredentials>
+    fun findFirstByUsername(username: String) : Optional<UserCredentials>
+    fun findFirstByEmail(email: String) : Optional<UserCredentials>
     fun existsByUsername(username: String) : Boolean
     fun existsByEmail(email: String) : Boolean
 }

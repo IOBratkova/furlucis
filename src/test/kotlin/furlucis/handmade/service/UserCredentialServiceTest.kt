@@ -3,6 +3,8 @@ package furlucis.handmade.service
 import furlucis.handmade.HandmadeApplicationTests
 import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.enums.RoleEnum
+import furlucis.handmade.exceptions.EmailException
+import furlucis.handmade.exceptions.UsernameException
 import furlucis.handmade.repositories.UserCridentialsRepo
 import furlucis.handmade.service.user.UserCridentialsService
 import org.junit.jupiter.api.Test
@@ -27,6 +29,40 @@ class UserCredentialServiceTest @Autowired constructor(
             null
         )
         repo.save(userCredentials)
+    }
+
+    @Test
+    fun `user found in by name` () {
+        val result = service.findByUsername("testname")
+        Assertions.assertEquals(result.username, "testname")
+        Assertions.assertEquals(result.password, "password")
+        Assertions.assertEquals(result.email, "email@email.ru")
+    }
+
+    @Test
+    fun `user not found in by name` () {
+        val thrown = Assertions.assertThrows(UsernameException::class.java) {
+            service.findByUsername("notname")
+        }
+        Assertions.assertNotNull(thrown)
+        Assertions.assertEquals(thrown.message, "Пользователь с username notname не существует.")
+    }
+
+    @Test
+    fun `user found in by email` () {
+        val result = service.findByEmail("email@email.ru")
+        Assertions.assertEquals(result.username, "testname")
+        Assertions.assertEquals(result.password, "password")
+        Assertions.assertEquals(result.email, "email@email.ru")
+    }
+
+    @Test
+    fun `user not found in by email` () {
+        val thrown = Assertions.assertThrows(EmailException::class.java) {
+            service.findByEmail("email@email.com")
+        }
+        Assertions.assertNotNull(thrown)
+        Assertions.assertEquals(thrown.message, "Пользователь с email email@email.com не существует.")
     }
 
     @Test
