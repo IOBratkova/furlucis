@@ -35,14 +35,14 @@ class UserCridentialsServiceImpl @Autowired constructor(
     }
 
     override fun findByUsername(username: String): UserCredentials {
-        return userCridentialsRepo.findByUsername(username)
+        return userCridentialsRepo.findFirstByUsername(username)
                 .orElseThrow {
                    UsernameException(username)
                 }
     }
 
     override fun findByEmail(email: String): UserCredentials {
-        return userCridentialsRepo.findByEmail(email)
+        return userCridentialsRepo.findFirstByEmail(email)
             .orElseThrow {
                 EmailException(email)
             }

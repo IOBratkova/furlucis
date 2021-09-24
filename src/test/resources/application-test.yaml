@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_URL:localhost:54322/handmade_test}
+    username: ${DB_USERNAME:fur}
+    password: ${DB_PASSWORD:lucis}
+    driverClassName: org.postgresql.Driver
+  liquibase:
+    drop-first: true
+
