@@ -7,4 +7,6 @@ interface JwtProvider {
     fun validateToken(token: String): Boolean
 
     fun getUserIdFromToken(token: String) : Long
+
+    fun getUsernameFromToken(token: String) : String
 }

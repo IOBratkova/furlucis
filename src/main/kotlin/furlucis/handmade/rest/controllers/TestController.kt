@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("v1/test")
 class TestController {
     @GetMapping("/full-permit")
-    fun getAdmin(): String {
+    fun toAll(): String {
         return "full-permit"
+    }
+
+    @GetMapping("/user")
+    fun toUser(): String {
+        return "user"
     }
 
 

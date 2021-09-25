@@ -29,7 +29,8 @@ class SecurityConfig @Autowired constructor(
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/v1/test/**").permitAll()
+                .antMatchers("/v1/test/full-permit").permitAll()
+                .antMatchers("/v1/test/user").hasRole("USER")
                 .antMatchers("/v1/auth/**").permitAll()
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)

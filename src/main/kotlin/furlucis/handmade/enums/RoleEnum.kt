@@ -1,16 +1,16 @@
 package furlucis.handmade.enums
 
 enum class RoleEnum(val text: String) {
-    ADMIN("ADMIN") {
+    ADMIN("ROLE_ADMIN") {
         override fun getCode(): Int = 0
     },
-    MODERATOR("MODERATOR") {
+    MODERATOR("ROLE_MODERATOR") {
         override fun getCode(): Int = 1
     },
-    USER("USER") {
+    USER("ROLE_USER") {
         override fun getCode(): Int = 2
     },
-    UNKNOWN("UNKNOWN") {
+    UNKNOWN("ROLE_UNKNOWN") {
         override fun getCode(): Int = -1
     };
 

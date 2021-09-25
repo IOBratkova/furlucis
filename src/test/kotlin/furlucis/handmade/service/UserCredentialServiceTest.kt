@@ -42,6 +42,7 @@ class UserCredentialServiceTest @Autowired constructor(
             null
         )
         service.save(userCredentials)
+
         var user = service.findUserByCredentialDate("emaieee@email.ru", "testname__", "password_new")
         Assertions.assertNotNull(user)
 
@@ -94,17 +95,17 @@ class UserCredentialServiceTest @Autowired constructor(
 
     @Test
     fun `do not find user by email and password because email not exists` () {
-        val userCredentials = UserCredentials(
-            null,
-            "testname__3",
-            "password",
-            "emailemailemail9@email.ru",
-            RoleEnum.USER.text,
-            null,
-            null
-        )
-        val result = service.save(userCredentials)
-        Assertions.assertNotNull(result)
+//        val userCredentials = UserCredentials(
+//            null,
+//            "testname__3",
+//            "password",
+//            "emailemailemail9@email.ru",
+//            RoleEnum.USER.text,
+//            null,
+//            null
+//        )
+//        val result = service.save(userCredentials)
+//        Assertions.assertNotNull(result)
 
         val thrown = Assertions.assertThrows(EmailException::class.java) {
             service.findByEmilAndPassword("el@email.ru", "password")
@@ -222,7 +223,7 @@ class UserCredentialServiceTest @Autowired constructor(
     }
 
     @Test
-    fun `user found in by id` () {
+    fun `user found in db by id` () {
         val result = service.findById(1L)
         Assertions.assertEquals(result.username, "testname")
         Assertions.assertEquals(result.password, "password")

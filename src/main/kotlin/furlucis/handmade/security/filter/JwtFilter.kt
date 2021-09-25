@@ -33,8 +33,8 @@ class JwtFilter @Autowired constructor(
     ) {
         val jwt = getJwtFromRequest(request)
         if (!jwt.isNullOrEmpty() && jwtProvider.validateToken(jwt)) {
-            val id = jwtProvider.getUserIdFromToken(jwt)
-            val furUserDetails = furUserDetailService.loadUserById(id)
+            val username = jwtProvider.getUsernameFromToken(jwt)
+            val furUserDetails = furUserDetailService.loadUserByUsername(username)
             val authentication = UsernamePasswordAuthenticationToken(furUserDetails, null, furUserDetails.authorities)
             authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
             SecurityContextHolder.getContext().authentication = authentication

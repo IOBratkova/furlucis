@@ -23,7 +23,6 @@ class AuthController @Autowired constructor(
 ) {
     @PostMapping("/registration")
     fun register(@RequestBody request: RegisterRequestDto): RegisterResponceDto {
-//        val userCredentials = authMapper.toUserCredential(request, RoleEnum.USER)
         val userCredentials = authMapper.toUserCredential(request)
         return RegisterResponceDto(userCridentialsService.save(userCredentials).id!!)
     }

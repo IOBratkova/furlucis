@@ -46,4 +46,10 @@ class JwtProviderImpl : JwtProvider {
         return claims.subject.toLong()
     }
 
+    override fun getUsernameFromToken(token: String): String {
+        val jwtParser =  Jwts.parserBuilder().setSigningKey(secretKey)
+        var claims = jwtParser.build().parseClaimsJws(token).body
+        return claims.subject
+    }
+
 }
