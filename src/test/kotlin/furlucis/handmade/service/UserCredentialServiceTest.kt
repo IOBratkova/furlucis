@@ -31,10 +31,32 @@ class UserCredentialServiceTest @Autowired constructor(
     }
 
     @Test
+    fun `find user by credentials` () {
+        val userCredentials = UserCredentials(
+            null,
+            "testname__",
+            "password_new",
+            "emaieee@email.ru",
+            RoleEnum.USER.text,
+            null,
+            null
+        )
+        service.save(userCredentials)
+        var user = service.findUserByCredentialDate("emaieee@email.ru", "testname__", "password_new")
+        Assertions.assertNotNull(user)
+
+        user = service.findUserByCredentialDate(null, "testname__", "password_new")
+        Assertions.assertNotNull(user)
+
+        user = service.findUserByCredentialDate("emaieee@email.ru", null, "password_new")
+        Assertions.assertNotNull(user)
+    }
+
+    @Test
     fun `find user by email and password` () {
         val userCredentials = UserCredentials(
             null,
-            "testname__111",
+            "testname__1",
             "password",
             "emailemailemail@email.ru",
             RoleEnum.USER.text,
@@ -47,16 +69,16 @@ class UserCredentialServiceTest @Autowired constructor(
         val user = service.findByEmilAndPassword("emailemailemail@email.ru", "password")
         Assertions.assertNotNull(user)
         Assertions.assertEquals(user.email, "emailemailemail@email.ru")
-        Assertions.assertEquals(user.username, "testname__111")
+        Assertions.assertEquals(user.username, "testname__1")
     }
 
     @Test
     fun `find user by username and password` () {
         val userCredentials = UserCredentials(
             null,
-            "testname__111",
+            "testname__2",
             "password",
-            "emailemailemail@email.ru",
+            "emailemailemail6@email.ru",
             RoleEnum.USER.text,
             null,
             null
@@ -64,19 +86,19 @@ class UserCredentialServiceTest @Autowired constructor(
         val result = service.save(userCredentials)
         Assertions.assertNotNull(result)
 
-        val user = service.findByUsernameAndPassword("testname__111", "password")
+        val user = service.findByUsernameAndPassword("testname__2", "password")
         Assertions.assertNotNull(user)
-        Assertions.assertEquals(user.email, "emailemailemail@email.ru")
-        Assertions.assertEquals(user.username, "testname__111")
+        Assertions.assertEquals(user.email, "emailemailemail6@email.ru")
+        Assertions.assertEquals(user.username, "testname__2")
     }
 
     @Test
     fun `do not find user by email and password because email not exists` () {
         val userCredentials = UserCredentials(
             null,
-            "testname__111",
+            "testname__3",
             "password",
-            "emailemailemail@email.ru",
+            "emailemailemail9@email.ru",
             RoleEnum.USER.text,
             null,
             null
@@ -94,9 +116,9 @@ class UserCredentialServiceTest @Autowired constructor(
     fun `do not find user by email and password because username not exists` () {
         val userCredentials = UserCredentials(
             null,
-            "testname__111",
+            "testname__4",
             "password",
-            "emailemailemail@email.ru",
+            "emailemailemail0@email.ru",
             RoleEnum.USER.text,
             null,
             null
@@ -111,12 +133,51 @@ class UserCredentialServiceTest @Autowired constructor(
     }
 
     @Test
+    fun `do not find user by credentials` () {
+        var thrown = Assertions.assertThrows(IncorrectCredentialsException::class.java) {
+            service.findUserByCredentialDate(null, null, null)
+        }
+        Assertions.assertEquals(thrown.message, "Некорректные параметры запроса")
+
+        thrown = Assertions.assertThrows(IncorrectCredentialsException::class.java) {
+            service.findUserByCredentialDate("lalala@lalal.com", null, null)
+        }
+        Assertions.assertEquals(thrown.message, "Некорректные параметры запроса")
+
+        thrown = Assertions.assertThrows(IncorrectCredentialsException::class.java) {
+            service.findUserByCredentialDate(null, "namenamename", null)
+        }
+        Assertions.assertEquals(thrown.message, "Некорректные параметры запроса")
+
+        thrown = Assertions.assertThrows(IncorrectCredentialsException::class.java) {
+            service.findUserByCredentialDate("lalala@lalal.com", "namenamename", null)
+        }
+        Assertions.assertEquals(thrown.message, "Некорректные параметры запроса")
+
+        var emailException = Assertions.assertThrows(EmailException::class.java) {
+            service.findUserByCredentialDate("lalala@lalal.com", "namenamename", "passs")
+        }
+        Assertions.assertEquals(emailException.message, "Пользователь с email lalala@lalal.com не существует.")
+
+        emailException = Assertions.assertThrows(EmailException::class.java) {
+            service.findUserByCredentialDate("lalala@lalal.com", null, "passs")
+        }
+        Assertions.assertEquals(emailException.message, "Пользователь с email lalala@lalal.com не существует.")
+
+       val usernameException = Assertions.assertThrows(UsernameException::class.java) {
+           service.findUserByCredentialDate(null, "namenamename", "passs")
+       }
+        Assertions.assertEquals(usernameException.message, "Пользователь с username namenamename не существует.")
+    }
+
+
+    @Test
     fun `save user` () {
         val userCredentials = UserCredentials(
             null,
-            "testname__",
+            "testname__5",
             "password_new",
-            "emailemailemail@email.ru",
+            "emailemailemail5@email.ru",
             RoleEnum.USER.text,
             null,
             null
@@ -130,7 +191,7 @@ class UserCredentialServiceTest @Autowired constructor(
     fun `do not save user by email` () {
         val userCredentials = UserCredentials(
             null,
-            "testname__10",
+            "testname__6",
             "password_new",
             "email@email.ru",
             RoleEnum.USER.text,

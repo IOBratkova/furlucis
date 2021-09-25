@@ -65,8 +65,8 @@ class UserCridentialsServiceImpl @Autowired constructor(
         return validatePassword(password, userCridentials)
     }
 
-    override fun findUserByCredentialDate(email: String?, username: String?, password: String): UserCredentials {
-        if (email == null && username == null) {
+    override fun findUserByCredentialDate(email: String?, username: String?, password: String?): UserCredentials {
+        if (email == null && username == null || password === null) {
             throw IncorrectCredentialsException()
         }
         val userCridentials = if (email == null) findByUsername(username!!) else findByEmail(email)
