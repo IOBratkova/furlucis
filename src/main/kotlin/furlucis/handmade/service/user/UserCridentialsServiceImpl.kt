@@ -49,12 +49,15 @@ class UserCridentialsServiceImpl @Autowired constructor(
     }
 
     override fun findById(id: Long): UserCredentials {
-        return userCridentialsRepo.getById(id)
+        return userCridentialsRepo.findById(id)
+            .orElseThrow{
+                UserIdException(id)
+            }
     }
 
     override fun findByUsernameAndPassword(username: String, password: String): UserCredentials {
-        val userCridentials = findByUsername(username)
-        return validatePassword(password, userCridentials)
+        val userCredentials = findByUsername(username)
+        return validatePassword(password, userCredentials)
     }
 
     override fun findByEmilAndPassword(email: String, password: String): UserCredentials {

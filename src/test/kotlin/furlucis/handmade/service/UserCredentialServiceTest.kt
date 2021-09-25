@@ -3,8 +3,7 @@ package furlucis.handmade.service
 import furlucis.handmade.HandmadeApplicationTests
 import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.enums.RoleEnum
-import furlucis.handmade.exceptions.EmailException
-import furlucis.handmade.exceptions.UsernameException
+import furlucis.handmade.exceptions.*
 import furlucis.handmade.repositories.UserCridentialsRepo
 import furlucis.handmade.service.user.UserCridentialsService
 import org.junit.jupiter.api.Test
@@ -20,7 +19,7 @@ class UserCredentialServiceTest @Autowired constructor(
     @BeforeEach
     fun createUserCredentials() {
         val userCredentials = UserCredentials(
-            null,
+            1L,
             "testname",
             "password",
             "email@email.ru",
@@ -29,6 +28,73 @@ class UserCredentialServiceTest @Autowired constructor(
             null
         )
         repo.save(userCredentials)
+    }
+
+    @Test
+    fun `save user` () {
+        val userCredentials = UserCredentials(
+            null,
+            "testname__",
+            "password_new",
+            "emailemailemail@email.ru",
+            RoleEnum.USER.text,
+            null,
+            null
+        )
+        val result = service.save(userCredentials)
+        Assertions.assertEquals(result.email, userCredentials.email)
+        Assertions.assertEquals(result.username, userCredentials.username)
+    }
+
+    @Test
+    fun `do not save user by email` () {
+        val userCredentials = UserCredentials(
+            null,
+            "testname__10",
+            "password_new",
+            "email@email.ru",
+            RoleEnum.USER.text,
+            null,
+            null
+        )
+        val thrown = Assertions.assertThrows(EmailRegistrationException::class.java) {
+            service.save(userCredentials)
+        }
+        Assertions.assertEquals(thrown.message, "Пользователь с email email@email.ru существует. Выберите другой email.")
+    }
+
+    @Test
+    fun `do not save user by username` () {
+        val userCredentials = UserCredentials(
+            null,
+            "testname",
+            "password_new",
+            "emailemail@email.ru",
+            RoleEnum.USER.text,
+            null,
+            null
+        )
+        val thrown = Assertions.assertThrows(UsernameRegistrationException::class.java) {
+            service.save(userCredentials)
+        }
+        Assertions.assertEquals(thrown.message, "Пользователь с username testname существует. Выберите другой логин.")
+    }
+
+    @Test
+    fun `user found in by id` () {
+        val result = service.findById(1L)
+        Assertions.assertEquals(result.username, "testname")
+        Assertions.assertEquals(result.password, "password")
+        Assertions.assertEquals(result.email, "email@email.ru")
+    }
+
+    @Test
+    fun `user not found in by id` () {
+        val thrown = Assertions.assertThrows(UserIdException::class.java) {
+            service.findById(999L)
+        }
+        Assertions.assertNotNull(thrown)
+        Assertions.assertEquals(thrown.message, "Пользователя с id 999 не существует.")
     }
 
     @Test
