@@ -51,6 +51,26 @@ class UserCredentialServiceTest @Autowired constructor(
     }
 
     @Test
+    fun `find user by username and password` () {
+        val userCredentials = UserCredentials(
+            null,
+            "testname__111",
+            "password",
+            "emailemailemail@email.ru",
+            RoleEnum.USER.text,
+            null,
+            null
+        )
+        val result = service.save(userCredentials)
+        Assertions.assertNotNull(result)
+
+        val user = service.findByUsernameAndPassword("testname__111", "password")
+        Assertions.assertNotNull(user)
+        Assertions.assertEquals(user.email, "emailemailemail@email.ru")
+        Assertions.assertEquals(user.username, "testname__111")
+    }
+
+    @Test
     fun `do not find user by email and password because email not exists` () {
         val userCredentials = UserCredentials(
             null,
@@ -68,6 +88,26 @@ class UserCredentialServiceTest @Autowired constructor(
             service.findByEmilAndPassword("el@email.ru", "password")
         }
         Assertions.assertEquals(thrown.message, "Пользователь с email el@email.ru не существует.")
+    }
+
+    @Test
+    fun `do not find user by email and password because username not exists` () {
+        val userCredentials = UserCredentials(
+            null,
+            "testname__111",
+            "password",
+            "emailemailemail@email.ru",
+            RoleEnum.USER.text,
+            null,
+            null
+        )
+        val result = service.save(userCredentials)
+        Assertions.assertNotNull(result)
+
+        val thrown = Assertions.assertThrows(UsernameException::class.java) {
+            service.findByUsernameAndPassword("testname__11112", "password")
+        }
+        Assertions.assertEquals(thrown.message, "Пользователь с username testname__11112 не существует.")
     }
 
     @Test
