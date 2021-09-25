@@ -15,7 +15,7 @@ class ExceptionsHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(value = [
         EmailRegistrationException::class,
         UsernameRegistrationException::class,
-        IncorrectRequestException::class,
+        IncorrectCredentialsException::class,
         EmailException::class, UserAuthException::class,
         UsernameException::class,
         ValidatePasswordException::class
