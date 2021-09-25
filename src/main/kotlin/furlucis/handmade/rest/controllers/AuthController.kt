@@ -30,7 +30,7 @@ class AuthController @Autowired constructor(
 
     @PostMapping("/auth")
     fun auth (@RequestBody request: AuthRequestDto) : AuthTokenDto {
-        val userCredentials = userCridentialsService.finsUserByCredentialDate(
+        val userCredentials = userCridentialsService.findUserByCredentialDate(
             request.email,
             request.username,
             request.password
