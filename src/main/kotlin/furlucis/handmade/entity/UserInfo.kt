@@ -9,37 +9,37 @@ import javax.persistence.*
 @Entity
 @Table(name = "user_info")
 @EntityListeners(AuditingEntityListener::class)
-data class UseInfo(
-        @Id
+data class UserInfo(
+    @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-        @OneToOne
+    @OneToOne
     @JoinColumn(name = "user_credentials_id")
     val userCredentials: UserCredentials,
 
-        @Column(name = "first_name", nullable = false)
-    val firstName : String,
+    @Column(name = "first_name", nullable = false)
+    val firstName: String,
 
-        @Column(name = "second_name")
-    val secondName : String?,
+    @Column(name = "second_name")
+    val secondName: String?,
 
-        @Column(name = "patronymic")
-    val patronymic : String?,
+    @Column(name = "patronymic")
+    val patronymic: String?,
 
-        @Column(name = "description")
-    val description : String?,
+    @Column(name = "description")
+    val description: String?,
 
-        @CreatedDate
+    @CreatedDate
     @Column(name = "created", updatable = false, nullable = false)
     val created: Date? = null,
 
-        @LastModifiedDate
+    @LastModifiedDate
     @Column(name = "updated", nullable = false)
     val updated: Date? = null,
 
-        @Column(name = "avatar")
+    @Column(name = "avatar")
     val avatar: String? = null
 
 )

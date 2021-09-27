@@ -11,30 +11,30 @@ import javax.validation.constraints.Email
 @Table(name = "user_credentials")
 @EntityListeners(AuditingEntityListener::class)
 data class UserCredentials(
-        @Id
-        @Column(name = "id")
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long? = null,
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null,
 
-        @Column(name = "username", nullable = false)
-        var username: String,
+    @Column(name = "username", nullable = false)
+    var username: String,
 
-        @Column(name = "password", nullable = false)
-        var password: String,
+    @Column(name = "password", nullable = false)
+    var password: String,
 
-        @Email
+    @Email
     @Column(name = "email", nullable = false)
-        var email: String,
+    var email: String,
 
-        @Column(name = "role", nullable = false)
-        var role: String,
+    @Column(name = "role", nullable = false)
+    var role: String,
 
-        @CreatedDate
+    @CreatedDate
     @Column(name = "created") //, columnDefinition = "DATE")
-        var created: Date? = null,
+    var created: Date? = null,
 
-        @LastModifiedDate
+    @LastModifiedDate
     @Column(name = "updated") //, columnDefinition = "DATE")
-        var updated: Date? = null
+    var updated: Date? = null
 
 )
