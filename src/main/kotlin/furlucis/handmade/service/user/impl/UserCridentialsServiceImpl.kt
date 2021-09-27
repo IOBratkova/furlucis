@@ -1,9 +1,10 @@
-package furlucis.handmade.service.user
+package furlucis.handmade.service.user.impl
 
 import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.exceptions.*
 import furlucis.handmade.repositories.UserCridentialsRepo
+import furlucis.handmade.service.user.UserCridentialsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service

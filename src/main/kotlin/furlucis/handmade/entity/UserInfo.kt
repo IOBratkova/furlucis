@@ -31,15 +31,15 @@ data class UserInfo(
     @Column(name = "description")
     val description: String?,
 
+    @Column(name = "avatar")
+    val avatar: String? = null,
+
     @CreatedDate
     @Column(name = "created", updatable = false, nullable = false)
     val created: Date? = null,
 
     @LastModifiedDate
     @Column(name = "updated", nullable = false)
-    val updated: Date? = null,
-
-    @Column(name = "avatar")
-    val avatar: String? = null
+    val updated: Date? = null
 
 )
