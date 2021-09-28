@@ -7,26 +7,26 @@ import furlucis.handmade.rest.dto.RegisterResponceDto
 import furlucis.handmade.rest.dto.RegisterRequestDto
 import furlucis.handmade.rest.mappers.AuthMapper
 import furlucis.handmade.security.provider.JwtProvider
-import furlucis.handmade.service.user.UserCridentialsService
+import furlucis.handmade.service.user.UserCredentialsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("v1/auth")
 class AuthController @Autowired constructor(
-        private val userCridentialsService: UserCridentialsService,
-        private val authMapper: AuthMapper,
-        private val jwtProvider: JwtProvider
+    private val userCredentialsService: UserCredentialsService,
+    private val authMapper: AuthMapper,
+    private val jwtProvider: JwtProvider
 ) {
     @PostMapping("/registration")
     fun register(@RequestBody request: RegisterRequestDto): RegisterResponceDto {
-        val userCredentials = authMapper.toUserCredential(request)
-        return RegisterResponceDto(userCridentialsService.save(userCredentials).id!!)
+        val userCredentials = authMapper.toUserCredential(request, RoleEnum.USER)
+        return RegisterResponceDto(userCredentialsService.save(userCredentials).id!!)
     }
 
     @PostMapping("/auth")
     fun auth (@RequestBody request: AuthRequestDto) : AuthTokenDto {
-        val userCredentials = userCridentialsService.findUserByCredentialDate(
+        val userCredentials = userCredentialsService.findUserByCredentialDate(
             request.email,
             request.username,
             request.password

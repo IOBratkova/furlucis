@@ -5,14 +5,14 @@ import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.exceptions.*
 import furlucis.handmade.repositories.UserCridentialsRepo
-import furlucis.handmade.service.user.UserCridentialsService
+import furlucis.handmade.service.user.UserCredentialsService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 
 class UserCredentialServiceTest @Autowired constructor(
-    private val service: UserCridentialsService,
+    private val service: UserCredentialsService,
     private val repo: UserCridentialsRepo
 ) : HandmadeApplicationTests() {
 

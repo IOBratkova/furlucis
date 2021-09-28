@@ -13,4 +13,8 @@ class UserServiceImpl @Autowired constructor(
         private val userInfoRepo: UserInfoRepo
 ): UserService {
 
+        override fun save(userInfo: UserInfo): UserInfo {
+                return userInfoRepo.save(userInfo)
+        }
+
 }

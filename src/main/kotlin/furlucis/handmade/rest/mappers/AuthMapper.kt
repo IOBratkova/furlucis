@@ -20,7 +20,6 @@ interface AuthMapper {
 
     fun toUserCredentialsDto(userCredentials: UserCredentials) : UserCredentialsDto
 
-    @InheritInverseConfiguration
     fun toUserCredentials(userCredentialsDto: UserCredentialsDto) : UserCredentials
 
 }
