@@ -14,4 +14,6 @@ interface UserMapper {
 
     @InheritInverseConfiguration
     fun toUserInfoDto(userInfo: UserInfo) : UserInfoDto
+
+
 }

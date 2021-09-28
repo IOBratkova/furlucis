@@ -9,10 +9,7 @@ import furlucis.handmade.rest.mappers.AuthMapper
 import furlucis.handmade.security.provider.JwtProvider
 import furlucis.handmade.service.user.UserCridentialsService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("v1/auth")
@@ -35,6 +32,6 @@ class AuthController @Autowired constructor(
             request.password
         )
         val token = jwtProvider.generateToken(userCredentials.username)
-        return AuthTokenDto(token)
+        return AuthTokenDto(token, userCredentials.id!!)
     }
 }
