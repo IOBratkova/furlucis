@@ -3,7 +3,7 @@ package furlucis.handmade.service.user.impl
 import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.exceptions.*
-import furlucis.handmade.repositories.UserCridentialsRepo
+import furlucis.handmade.repositories.UserCredentialsRepo
 import furlucis.handmade.service.user.UserCredentialsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -13,47 +13,47 @@ import java.util.*
 @Service
 class UserCredentialsServiceImpl @Autowired constructor(
         private val passwordEncoder: PasswordEncoder,
-        private val userCridentialsRepo: UserCridentialsRepo
+        private val userCredentialsRepo: UserCredentialsRepo
 ): UserCredentialsService {
 
     override fun save(userCredentials: UserCredentials): UserCredentials {
-        return if (userCridentialsRepo.existsByUsername(userCredentials.username)) {
+        return if (userCredentialsRepo.existsByUsername(userCredentials.username)) {
             throw UsernameRegistrationException(userCredentials.username)
-        } else if (userCridentialsRepo.existsByEmail(userCredentials.email)) {
+        } else if (userCredentialsRepo.existsByEmail(userCredentials.email)) {
             throw EmailRegistrationException(userCredentials.email)
         } else {
             userCredentials.role = RoleEnum.USER.text
             userCredentials.password = passwordEncoder.encode(userCredentials.password)
             userCredentials.created = Date()
             userCredentials.updated = userCredentials.created
-            userCridentialsRepo.save(userCredentials)
+            userCredentialsRepo.save(userCredentials)
         }
     }
 
     override fun existsByUsername(username: String): Boolean {
-        return userCridentialsRepo.existsByUsername(username)
+        return userCredentialsRepo.existsByUsername(username)
     }
 
     override fun existsByEmail(email: String): Boolean {
-        return userCridentialsRepo.existsByEmail(email)
+        return userCredentialsRepo.existsByEmail(email)
     }
 
     override fun findByUsername(username: String): UserCredentials {
-        return userCridentialsRepo.findFirstByUsername(username)
+        return userCredentialsRepo.findFirstByUsername(username)
                 .orElseThrow {
                    UsernameException(username)
                 }
     }
 
     override fun findByEmail(email: String): UserCredentials {
-        return userCridentialsRepo.findFirstByEmail(email)
+        return userCredentialsRepo.findFirstByEmail(email)
             .orElseThrow {
                 EmailException(email)
             }
     }
 
     override fun findById(id: Long): UserCredentials {
-        return userCridentialsRepo.findById(id)
+        return userCredentialsRepo.findById(id)
             .orElseThrow{
                 UserIdException(id)
             }

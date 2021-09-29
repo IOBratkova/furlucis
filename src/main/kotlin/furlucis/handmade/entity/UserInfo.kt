@@ -17,7 +17,7 @@ data class UserInfo(
 
     @OneToOne
     @JoinColumn(name = "user_credentials_id", referencedColumnName = "id")
-    var userCredentials: UserCredentials?,
+    var userCredentials: UserCredentials,
 
     @Column(name = "first_name", nullable = false)
     val firstName: String,
