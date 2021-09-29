@@ -28,9 +28,9 @@ class HandmadeApplicationTests {
 	}
 
 	fun createUserInfo() {
-		val userCredentials2 = userCredentialsRepo.findById(2L).get()
+		val userCredentials2 = userCredentialsRepo.findById(1L).get()
 		val userInfo2 = UserInfo(
-			2L,
+			1L,
 			userCredentials2,
 			"Толя",
 			null,
@@ -64,8 +64,20 @@ class HandmadeApplicationTests {
 			null,
 			null
 		)
+
+		val userCredentials3 = UserCredentials(
+			3L,
+			"testname3",
+			"password3",
+			"email3@email.ru",
+			RoleEnum.USER.text,
+			null,
+			null
+		)
+
 		userCredentialsRepo.save(userCredentials1)
 		userCredentialsRepo.save(userCredentials2)
+		userCredentialsRepo.save(userCredentials3)
 	}
 
 

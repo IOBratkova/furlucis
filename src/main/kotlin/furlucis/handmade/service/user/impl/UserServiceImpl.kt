@@ -11,7 +11,7 @@ import javax.validation.constraints.Null
 
 @Service
 class UserServiceImpl @Autowired constructor(
-        private val userInfoRepo: UserInfoRepo
+        private val userInfoRepo: UserInfoRepo,
 ): UserService {
 
         override fun save(userInfo: UserInfo): UserInfo {

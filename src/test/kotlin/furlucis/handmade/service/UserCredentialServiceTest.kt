@@ -17,8 +17,8 @@ class UserCredentialServiceTest @Autowired constructor(
 
     @Test
     fun `find incomplete registration user` () {
-        val result = userCredentialsService.findById(1L)
-        val incompleteRegistration = userCredentialsService.findIncompleteRegistration(1L)
+        val result = userCredentialsService.findById(2L)
+        val incompleteRegistration = userCredentialsService.findIncompleteRegistration(2L)
         Assertions.assertEquals(result.username, incompleteRegistration.username)
         Assertions.assertEquals(result.password, incompleteRegistration.password)
         Assertions.assertEquals(result.email, incompleteRegistration.email)
@@ -27,15 +27,15 @@ class UserCredentialServiceTest @Autowired constructor(
     @Test
     fun `do not find incomplete registration user` () {
         val thrown = Assertions.assertThrows(CompleteRegistrationException::class.java) {
-            userCredentialsService.findIncompleteRegistration(2L)
+            userCredentialsService.findIncompleteRegistration(1L)
         }
-        Assertions.assertEquals(thrown.message, "Пользователь с username testname2 полностью завершил регистрацию.")
+        Assertions.assertEquals(thrown.message, "Пользователь с username testname полностью завершил регистрацию.")
     }
 
     @Test
     fun `find complete registration user` () {
-        val result = userCredentialsService.findById(2L)
-        val completeRegistration = userCredentialsService.findCompleteRegistration(2L)
+        val result = userCredentialsService.findById(1L)
+        val completeRegistration = userCredentialsService.findCompleteRegistration(1L)
         Assertions.assertEquals(result.username, completeRegistration.username)
         Assertions.assertEquals(result.password, completeRegistration.password)
         Assertions.assertEquals(result.email, completeRegistration.email)
@@ -45,9 +45,9 @@ class UserCredentialServiceTest @Autowired constructor(
     @Test
     fun `do not find complete registration user` () {
         val thrown = Assertions.assertThrows(IncompleteRegistrationException::class.java) {
-            userCredentialsService.findCompleteRegistration(1L)
+            userCredentialsService.findCompleteRegistration(2L)
         }
-        Assertions.assertEquals(thrown.message, "Пользователь с username testname не завершил регистрацию.")
+        Assertions.assertEquals(thrown.message, "Пользователь с username testname2 не завершил регистрацию.")
     }
 
     @Test
