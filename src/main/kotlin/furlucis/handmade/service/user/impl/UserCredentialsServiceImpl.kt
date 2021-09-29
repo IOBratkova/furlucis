@@ -26,11 +26,13 @@ class UserCredentialsServiceImpl @Autowired constructor(
         if (userCredentialsRepo.existsByEmail(userCredentials.email)) {
             throw EmailRegistrationException(userCredentials.email)
         }
-        val userInfo = UserInfo(null, userCredentials, null, null, null, null, null, null, null)
+        val userInfo = UserInfo(userCredentials.id, userCredentials, null, null, null, null, null, null, null, null)
         userCredentials.role = RoleEnum.USER.text
         userCredentials.password = passwordEncoder.encode(userCredentials.password)
         userCredentials.created = Date()
         userCredentials.updated = userCredentials.created
+        userInfo.created = userCredentials.created
+        userInfo.updated = userCredentials.updated
         userCredentialsRepo.save(userCredentials)
         userService.save(userInfo)
         return userCredentials

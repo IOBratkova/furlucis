@@ -6,4 +6,5 @@
     <include file="changelog/v1/c1.1_handmade_type.xml" relativeToChangelogFile="true"/>
     <include file="changelog/v1/c1.2_user_credentials.xml" relativeToChangelogFile="true"/>
     <include file="changelog/v1/c1.3_user_info.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v1/c1.4_post.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

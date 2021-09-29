@@ -9,7 +9,6 @@ import javax.validation.constraints.Email
 
 @Entity
 @Table(name = "user_credentials")
-@EntityListeners(AuditingEntityListener::class)
 data class UserCredentials(
     @Id
     @Column(name = "id")
@@ -32,12 +31,10 @@ data class UserCredentials(
     @OneToOne(mappedBy = "userCredentials")
     var userInfo: UserInfo? = null,
 
-    @CreatedDate
-    @Column(name = "created") //, columnDefinition = "DATE")
+    @Column(name = "created")
     var created: Date? = null,
 
-    @LastModifiedDate
-    @Column(name = "updated") //, columnDefinition = "DATE")
+    @Column(name = "updated")
     var updated: Date? = null
 
 )

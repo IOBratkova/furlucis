@@ -34,6 +34,9 @@ data class UserInfo(
     @Column(name = "avatar")
     val avatar: String? = null,
 
+    @OneToMany(mappedBy = "userInfo")
+    val posts: List<Post>? = null,
+
     @CreatedDate
     @Column(name = "created", updatable = false)
     var created: Date? = null,

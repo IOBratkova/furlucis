@@ -37,6 +37,7 @@ class HandmadeApplicationTests {
 			null,
 			"desc",
 			null,
+			null,
 			Date(),
 			Date()
 		)
@@ -52,6 +53,7 @@ class HandmadeApplicationTests {
 			null,
 			"desc",
 			null,
+			null,
 			Date(),
 			Date()
 		)
@@ -66,6 +68,7 @@ class HandmadeApplicationTests {
 			null,
 			null,
 			"desc",
+			null,
 			null,
 			Date(),
 			Date()

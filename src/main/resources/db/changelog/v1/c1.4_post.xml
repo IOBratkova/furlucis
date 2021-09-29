@@ -1,0 +1,37 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <property name="blob_type" value="bytea" dbms="postgresql"/>
+
+
+    <changeSet id="290921-1418" author="bratckova">
+
+        <createSequence
+                sequenceName="post_seq"
+                incrementBy="1"
+                minValue="1"
+                dataType="bigint"
+                startValue="1"/>
+
+        <createTable tableName="post">
+            <column name="id" type="bigint" defaultValueComputed="nextval('post_seq')">
+                <constraints primaryKey="true" foreignKeyName="post_fk"/>
+            </column>
+            <column name="title" type="varchar(30)"/>
+            <column name="text" type="varchar(1000)"/>
+            <column name="type" type="varchar(10)"/>
+            <column name="created" type="datetime" />
+            <column name="updated" type="datetime" />
+            <column name="user_info_id" type="bigint" />
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="user_info_id"
+                                 baseTableName="post"
+                                 constraintName="user_info_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_info"/>
+    </changeSet>
+
+</databaseChangeLog>
