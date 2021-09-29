@@ -9,14 +9,14 @@
     <changeSet id="07082021-2121" author="bratckova">
 
         <createSequence
-                sequenceName="runtime_name_seq"
+                sequenceName="info_seq"
                 incrementBy="1"
                 minValue="1"
                 dataType="bigint"
                 startValue="1"/>
 
         <createTable tableName="user_info">
-            <column name="id" type="bigint" defaultValueComputed="nextval('runtime_name_seq')">
+            <column name="id" type="bigint" defaultValueComputed="nextval('info_seq')">
                 <constraints primaryKey="true" foreignKeyName="user_info_fk"/>
             </column>
             <column name="first_name" type="varchar(30)"/>
