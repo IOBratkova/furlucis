@@ -1,6 +1,5 @@
 package furlucis.handmade.entity
 
-import furlucis.handmade.enums.PostEnum
 import java.util.*
 import javax.persistence.*
 
