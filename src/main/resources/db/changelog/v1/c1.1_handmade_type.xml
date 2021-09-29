@@ -6,9 +6,16 @@
     <property name="blob_type" value="bytea" dbms="postgresql"/>
 
     <changeSet id="31072021-1313" author="bratckova">
+        <createSequence
+                sequenceName="handmade_type_seq"
+                incrementBy="1"
+                minValue="1"
+                dataType="bigint"
+                startValue="1"/>
+
         <createTable tableName="handmade_type">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" />
+            <column name="id" type="bigint" defaultValueComputed="nextval('handmade_type_seq')">
+                <constraints primaryKey="true" foreignKeyName="handmade_type_fk"/>
             </column>
             <column name="title" type="varchar(30)" />
             <column name="description" type="text" />

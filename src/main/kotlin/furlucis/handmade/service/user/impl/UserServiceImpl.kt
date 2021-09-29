@@ -20,9 +20,4 @@ class UserServiceImpl @Autowired constructor(
                 return userInfoRepo.save(userInfo)
         }
 
-        override fun update(userInfo: UserInfo): UserInfo {
-                userInfo.updated = Date()
-                return userInfoRepo.save(userInfo)
-        }
-
 }

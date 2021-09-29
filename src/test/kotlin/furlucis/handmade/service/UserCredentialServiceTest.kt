@@ -15,14 +15,6 @@ class UserCredentialServiceTest @Autowired constructor(
     private val userCredentialsService: UserCredentialsService
 ) : HandmadeApplicationTests() {
 
-    @Test
-    fun `find incomplete registration user` () {
-        val result = userCredentialsService.findById(2L)
-        val incompleteRegistration = userCredentialsService.findIncompleteRegistration(2L)
-        Assertions.assertEquals(result.username, incompleteRegistration.username)
-        Assertions.assertEquals(result.password, incompleteRegistration.password)
-        Assertions.assertEquals(result.email, incompleteRegistration.email)
-    }
 
     @Test
     fun `do not find incomplete registration user` () {
@@ -40,14 +32,6 @@ class UserCredentialServiceTest @Autowired constructor(
         Assertions.assertEquals(result.password, completeRegistration.password)
         Assertions.assertEquals(result.email, completeRegistration.email)
         Assertions.assertNotNull(result.userInfo)
-    }
-
-    @Test
-    fun `do not find complete registration user` () {
-        val thrown = Assertions.assertThrows(IncompleteRegistrationException::class.java) {
-            userCredentialsService.findCompleteRegistration(2L)
-        }
-        Assertions.assertEquals(thrown.message, "Пользователь с username testname2 не завершил регистрацию.")
     }
 
     @Test

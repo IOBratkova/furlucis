@@ -18,14 +18,7 @@ class UserController @Autowired constructor(
 
     @PostMapping("/save")
     fun saveUserInfo(@RequestBody userInfoDto: UserInfoDto) : IdentifierDto<Long> {
-        val credentials = userCredentialService.findIncompleteRegistration(userInfoDto.userCredentialsId)
-        val userInfo = userMapper.toUserInfo(userInfoDto, credentials)
-        return IdentifierDto(userService.save(userInfo).id!!)
-    }
-
-    @PutMapping("/update")
-    fun updateUserInfo(@RequestBody userInfoDto: UserInfoDto) : IdentifierDto<Long> {
-        val credentials = userCredentialService.findCompleteRegistration(userInfoDto.userCredentialsId)
+        val credentials = userCredentialService.findById(userInfoDto.userCredentialsId)
         val userInfo = userMapper.toUserInfo(userInfoDto, credentials)
         return IdentifierDto(userService.save(userInfo).id!!)
     }

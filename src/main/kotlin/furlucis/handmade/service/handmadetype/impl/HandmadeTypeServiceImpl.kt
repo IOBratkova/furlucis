@@ -1,7 +1,8 @@
-package furlucis.handmade.service.handmadetype
+package furlucis.handmade.service.handmadetype.impl
 
 import furlucis.handmade.entity.HandmadeType
 import furlucis.handmade.repositories.HandmadeTypeRepo
+import furlucis.handmade.service.handmadetype.HandmadeTypeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

@@ -1,10 +1,12 @@
 package furlucis.handmade.service.user.impl
 
 import furlucis.handmade.entity.UserCredentials
+import furlucis.handmade.entity.UserInfo
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.exceptions.*
 import furlucis.handmade.repositories.UserCredentialsRepo
 import furlucis.handmade.service.user.UserCredentialsService
+import furlucis.handmade.service.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -13,21 +15,25 @@ import java.util.*
 @Service
 class UserCredentialsServiceImpl @Autowired constructor(
         private val passwordEncoder: PasswordEncoder,
-        private val userCredentialsRepo: UserCredentialsRepo
+        private val userCredentialsRepo: UserCredentialsRepo,
+        private val userService: UserService
 ): UserCredentialsService {
 
     override fun save(userCredentials: UserCredentials): UserCredentials {
-        return if (userCredentialsRepo.existsByUsername(userCredentials.username)) {
+        if (userCredentialsRepo.existsByUsername(userCredentials.username)) {
             throw UsernameRegistrationException(userCredentials.username)
-        } else if (userCredentialsRepo.existsByEmail(userCredentials.email)) {
-            throw EmailRegistrationException(userCredentials.email)
-        } else {
-            userCredentials.role = RoleEnum.USER.text
-            userCredentials.password = passwordEncoder.encode(userCredentials.password)
-            userCredentials.created = Date()
-            userCredentials.updated = userCredentials.created
-            userCredentialsRepo.save(userCredentials)
         }
+        if (userCredentialsRepo.existsByEmail(userCredentials.email)) {
+            throw EmailRegistrationException(userCredentials.email)
+        }
+        val userInfo = UserInfo(null, userCredentials, null, null, null, null, null, null, null)
+        userCredentials.role = RoleEnum.USER.text
+        userCredentials.password = passwordEncoder.encode(userCredentials.password)
+        userCredentials.created = Date()
+        userCredentials.updated = userCredentials.created
+        userCredentialsRepo.save(userCredentials)
+        userService.save(userInfo)
+        return userCredentials
     }
 
     override fun existsByUsername(username: String): Boolean {
@@ -57,6 +63,33 @@ class UserCredentialsServiceImpl @Autowired constructor(
             .orElseThrow{
                 UserIdException(id)
             }
+    }
+
+    override fun updateUsername(id: Long, username: String): UserCredentials {
+        val userCredentials = findById(id)
+        if (!existsByUsername(username)) {
+            throw UsernameRegistrationException(username)
+        }
+        userCredentials.updated = Date()
+        userCredentials.username = username
+        return save(userCredentials)
+    }
+
+    override fun updateEmail(id: Long, email: String): UserCredentials {
+        val userCredentials = findById(id)
+        if (!existsByEmail(email)) {
+            throw UsernameRegistrationException(email)
+        }
+        userCredentials.updated = Date()
+        userCredentials.email = email
+        return save(userCredentials)
+    }
+
+    override fun updatePassword(id: Long, newPassword: String, oldPassword: String): UserCredentials {
+        val userCredentials = validatePassword(oldPassword, findById(id))
+        userCredentials.password = passwordEncoder.encode(userCredentials.password)
+        userCredentials.updated = Date()
+        return save(userCredentials)
     }
 
     override fun findIncompleteRegistration(id: Long): UserCredentials {

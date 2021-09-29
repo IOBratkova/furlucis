@@ -28,11 +28,11 @@ class HandmadeApplicationTests {
 	}
 
 	fun createUserInfo() {
-		val userCredentials2 = userCredentialsRepo.findById(1L).get()
-		val userInfo2 = UserInfo(
-			1L,
-			userCredentials2,
-			"Толя",
+		var userCredentials = userCredentialsRepo.findById(1L).get()
+		var userInfo = UserInfo(
+			userCredentials.id,
+			userCredentials,
+			"Толя1",
 			null,
 			null,
 			"desc",
@@ -40,12 +40,42 @@ class HandmadeApplicationTests {
 			Date(),
 			Date()
 		)
-		userCredentials2.userInfo = userInfo2
-		userInfoRepo.save(userInfo2)
+		userCredentials.userInfo = userInfo
+		userInfoRepo.save(userInfo)
+
+		userCredentials = userCredentialsRepo.findById(2L).get()
+		userInfo = UserInfo(
+			userCredentials.id,
+			userCredentials,
+			"Толя2",
+			null,
+			null,
+			"desc",
+			null,
+			Date(),
+			Date()
+		)
+		userCredentials.userInfo = userInfo
+		userInfoRepo.save(userInfo)
+
+		userCredentials = userCredentialsRepo.findById(3L).get()
+		userInfo = UserInfo(
+			userCredentials.id,
+			userCredentials,
+			"Толя3",
+			null,
+			null,
+			"desc",
+			null,
+			Date(),
+			Date()
+		)
+		userCredentials.userInfo = userInfo
+		userInfoRepo.save(userInfo)
 	}
 
 	fun createUserCredentials() {
-		val userCredentials1 = UserCredentials(
+		var userCredentials = UserCredentials(
 			1L,
 			"testname",
 			"password",
@@ -54,8 +84,9 @@ class HandmadeApplicationTests {
 			null,
 			null
 		)
+		userCredentialsRepo.save(userCredentials)
 
-		val userCredentials2 = UserCredentials(
+		userCredentials = UserCredentials(
 			2L,
 			"testname2",
 			"password2",
@@ -64,8 +95,9 @@ class HandmadeApplicationTests {
 			null,
 			null
 		)
+		userCredentialsRepo.save(userCredentials)
 
-		val userCredentials3 = UserCredentials(
+		userCredentials = UserCredentials(
 			3L,
 			"testname3",
 			"password3",
@@ -74,10 +106,7 @@ class HandmadeApplicationTests {
 			null,
 			null
 		)
-
-		userCredentialsRepo.save(userCredentials1)
-		userCredentialsRepo.save(userCredentials2)
-		userCredentialsRepo.save(userCredentials3)
+		userCredentialsRepo.save(userCredentials)
 	}
 
 

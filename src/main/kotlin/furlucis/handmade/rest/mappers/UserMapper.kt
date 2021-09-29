@@ -23,7 +23,7 @@ interface UserMapper {
         Mapping(source = "userInfoDto.patronymic", target = "patronymic"),
         Mapping(source = "userInfoDto.description", target = "description"),
         Mapping(source = "userInfoDto.avatar", target = "avatar"),
-        Mapping(source = "userInfoDto.id", target = "id")
+        Mapping(source = "userCredentials.userInfo.id", target = "id")
     )
     fun toUserInfo(userInfoDto: UserInfoDto, userCredentials: UserCredentials) : UserInfo
 

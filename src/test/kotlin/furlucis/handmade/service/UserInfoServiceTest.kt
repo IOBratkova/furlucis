@@ -1,7 +1,6 @@
 package furlucis.handmade.service
 
 import furlucis.handmade.HandmadeApplicationTests
-import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.entity.UserInfo
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.exceptions.*
@@ -19,43 +18,21 @@ class UserInfoServiceTest @Autowired constructor(
 ) : HandmadeApplicationTests() {
 
     @Test
-    fun `update user info` () {
-        val credentials = userCredentialsRepo.findById(2L).get()
-        val userInfo = UserInfo(
-            2L,
-            credentials,
-            "newname",
-            "newwcond",
-            "newpatr",
-            "newdesc",
-            null,
-            null,
-            null
-        )
-        val result = userService.save(userInfo)
-        Assertions.assertEquals(result.id, 2L)
-        Assertions.assertEquals(result.firstName, "newname")
-        Assertions.assertEquals(result.secondName, "newwcond")
-        Assertions.assertEquals(result.patronymic, "newpatr")
-        Assertions.assertEquals(result.description, "newdesc")
-    }
-
-    @Test
     fun `save user info` () {
-        val credentials = userCredentialsRepo.findById(2L).get()
+        val credentials = userCredentialsRepo.findById(1L).get()
         val userInfo = UserInfo(
-            null,
+            credentials.userInfo!!.id!!,
             credentials,
             "firdt",
             "second",
             "patr",
             "desc",
-            null,
+            "kijk",
             null,
             null
         )
         val result = userService.save(userInfo)
-        Assertions.assertEquals(result.id, 2L)
+        Assertions.assertEquals(result.id, 1L)
     }
 
 }
