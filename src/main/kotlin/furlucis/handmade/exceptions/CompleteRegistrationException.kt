@@ -1,4 +1,4 @@
 package furlucis.handmade.exceptions
 
-class FullUserInfoException(username: String) :
+class CompleteRegistrationException(username: String) :
     Exception("Пользователь с username $username полностью завершил регистрацию.")

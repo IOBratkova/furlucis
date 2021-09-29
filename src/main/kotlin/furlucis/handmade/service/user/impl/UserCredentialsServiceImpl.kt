@@ -62,7 +62,15 @@ class UserCredentialsServiceImpl @Autowired constructor(
     override fun findIncompleteRegistration(id: Long): UserCredentials {
         val credentials = findById(id)
         if (credentials.userInfo != null) {
-            throw FullUserInfoException(credentials.username)
+            throw CompleteRegistrationException(credentials.username)
+        }
+        return credentials
+    }
+
+    override fun findCompleteRegistration(id: Long): UserCredentials {
+        val credentials = findById(id)
+        if (credentials.userInfo == null) {
+            throw IncompleteRegistrationException(credentials.username)
         }
         return credentials
     }

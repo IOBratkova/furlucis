@@ -11,6 +11,7 @@ class HandmadeTypeServiceImpl @Autowired constructor(
 ): HandmadeTypeService {
 
     override fun save(handmadeType: HandmadeType): Long {
+//        TODO: NullPointer!!!!
         return handmadeTypeRepo.save(handmadeType).id ?: throw NullPointerException()
     }
 
