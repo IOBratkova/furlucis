@@ -35,11 +35,11 @@ data class UserInfo(
     val avatar: String? = null,
 
     @CreatedDate
-    @Column(name = "created", updatable = false, nullable = false)
-    val created: Date? = null,
+    @Column(name = "created", updatable = false)
+    var created: Date? = null,
 
     @LastModifiedDate
-    @Column(name = "updated", nullable = false)
-    val updated: Date? = null
+    @Column(name = "updated")
+    var updated: Date? = null
 
 )

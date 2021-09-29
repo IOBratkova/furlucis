@@ -1,5 +1,6 @@
 package furlucis.handmade.rest.controllers
 
+import furlucis.handmade.rest.dto.IdentifierDto
 import furlucis.handmade.rest.dto.UserInfoDto
 import furlucis.handmade.rest.mappers.UserMapper
 import furlucis.handmade.service.user.UserCredentialsService
@@ -19,10 +20,10 @@ class UserController @Autowired constructor(
 ) {
 
     @PostMapping("/save")
-    fun saveUserInfo(@RequestBody userInfoDto: UserInfoDto) : Long {
-        var userInfo = userMapper.toUserInfo(userInfoDto)
-        userInfo.userCredentials = userCredentialService.findById(userInfoDto.userCredentials)
-        return userService.save(userInfo).id!!
+    fun saveUserInfo(@RequestBody userInfoDto: UserInfoDto) : IdentifierDto<Long> {
+        val userInfo = userMapper.toUserInfo(userInfoDto)
+        userInfo.userCredentials = userCredentialService.findById(userInfoDto.userCredentialsId)
+        return IdentifierDto(userService.save(userInfo).id!!)
     }
 
 }

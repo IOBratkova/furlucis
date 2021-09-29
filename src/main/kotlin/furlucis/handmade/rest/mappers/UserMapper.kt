@@ -8,10 +8,10 @@ import org.mapstruct.Mapping
 @Mapper(componentModel = "spring")
 interface UserMapper {
 
-    @Mapping(source = "userCredentials", target = "userCredentials.id")
+    @Mapping(source = "userCredentialsId", target = "userCredentials.id")
     fun toUserInfo(userInfoDto: UserInfoDto) : UserInfo
 
-    @Mapping(source = "userCredentials.id", target = "userCredentials")
+    @Mapping(source = "userCredentials.id", target = "userCredentialsId")
     fun toUserInfoDto(userInfo: UserInfo) : UserInfoDto
 
 }

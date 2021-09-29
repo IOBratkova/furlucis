@@ -23,5 +23,5 @@ class UserInfoDto (
     val id: Long?,
 
     @JsonProperty("userCredentialsId")
-    val userCredentials: Long
+    val userCredentialsId: Long
 )

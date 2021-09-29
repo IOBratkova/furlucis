@@ -5,10 +5,19 @@
 
     <property name="blob_type" value="bytea" dbms="postgresql"/>
 
+
     <changeSet id="07082021-2121" author="bratckova">
+
+        <createSequence
+                sequenceName="runtime_name_seq"
+                incrementBy="1"
+                minValue="1"
+                dataType="bigint"
+                startValue="1"/>
+
         <createTable tableName="user_info">
-            <column name="id" type="bigint">
-                <constraints primaryKey="true" />
+            <column name="id" type="bigint" defaultValueComputed="nextval('runtime_name_seq')">
+                <constraints primaryKey="true" foreignKeyName="user_info_fk"/>
             </column>
             <column name="first_name" type="varchar(30)"/>
             <column name="second_name" type="varchar(30)"/>
