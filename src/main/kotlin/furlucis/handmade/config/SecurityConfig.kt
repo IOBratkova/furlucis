@@ -31,7 +31,7 @@ class SecurityConfig @Autowired constructor(
                 .and()
                 .authorizeRequests()
                 .antMatchers("/v1/test/user").hasRole("USER")
-                .antMatchers("/v1/user/**").hasRole("USER")
+                .antMatchers("/v1/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/v1/auth/**").permitAll()
                 .antMatchers("/v1/test/full-permit").permitAll()
 

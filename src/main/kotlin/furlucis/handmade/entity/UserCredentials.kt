@@ -29,6 +29,9 @@ data class UserCredentials(
     @Column(name = "role", nullable = false)
     var role: String,
 
+    @OneToOne(mappedBy = "userCredentials")
+    var userInfo: UserInfo? = null,
+
     @CreatedDate
     @Column(name = "created") //, columnDefinition = "DATE")
     var created: Date? = null,

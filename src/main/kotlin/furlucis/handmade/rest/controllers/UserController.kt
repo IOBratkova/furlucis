@@ -21,8 +21,8 @@ class UserController @Autowired constructor(
 
     @PostMapping("/save")
     fun saveUserInfo(@RequestBody userInfoDto: UserInfoDto) : IdentifierDto<Long> {
-        val userCredentials = userCredentialService.findById(userInfoDto.userCredentialsId)
-        val userInfo = userMapper.toUserInfo(userInfoDto, userCredentials)
+        val credentials = userCredentialService.findIncompleteRegistration(userInfoDto.userCredentialsId)
+        val userInfo = userMapper.toUserInfo(userInfoDto, credentials)
         return IdentifierDto(userService.save(userInfo).id!!)
     }
 

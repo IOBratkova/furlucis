@@ -18,7 +18,8 @@ class ExceptionsHandler : ResponseEntityExceptionHandler() {
         IncorrectCredentialsException::class,
         EmailException::class, UserAuthException::class,
         UsernameException::class,
-        ValidatePasswordException::class
+        ValidatePasswordException::class,
+        FullUserInfoException::class
     ])
     fun handleException(e: Exception) : ResponseEntity<ExceptionModel> {
         val ex = ExceptionModel(e.message!!, Date())

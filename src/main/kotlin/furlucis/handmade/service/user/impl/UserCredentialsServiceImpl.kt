@@ -8,6 +8,7 @@ import furlucis.handmade.service.user.UserCredentialsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class UserCredentialsServiceImpl @Autowired constructor(
@@ -23,6 +24,8 @@ class UserCredentialsServiceImpl @Autowired constructor(
         } else {
             userCredentials.role = RoleEnum.USER.text
             userCredentials.password = passwordEncoder.encode(userCredentials.password)
+            userCredentials.created = Date()
+            userCredentials.updated = userCredentials.created
             userCridentialsRepo.save(userCredentials)
         }
     }
@@ -54,6 +57,14 @@ class UserCredentialsServiceImpl @Autowired constructor(
             .orElseThrow{
                 UserIdException(id)
             }
+    }
+
+    override fun findIncompleteRegistration(id: Long): UserCredentials {
+        val credentials = findById(id)
+        if (credentials.userInfo != null) {
+            throw FullUserInfoException(credentials.username)
+        }
+        return credentials
     }
 
     override fun findByUsernameAndPassword(username: String, password: String): UserCredentials {

@@ -20,7 +20,7 @@ class UserInfoDto (
     val avatar: String?,
 
     @JsonProperty("id")
-    val id: Long?,
+    var id: Long?,
 
     @JsonProperty("userCredentialsId")
     val userCredentialsId: Long
