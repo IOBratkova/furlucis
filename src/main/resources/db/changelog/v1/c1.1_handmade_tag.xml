@@ -7,15 +7,15 @@
 
     <changeSet id="31072021-1313" author="bratckova">
         <createSequence
-                sequenceName="handmade_type_seq"
+                sequenceName="handmade_tag_seq"
                 incrementBy="1"
                 minValue="1"
                 dataType="bigint"
                 startValue="1"/>
 
-        <createTable tableName="handmade_type">
-            <column name="id" type="bigint" defaultValueComputed="nextval('handmade_type_seq')">
-                <constraints primaryKey="true" foreignKeyName="handmade_type_fk"/>
+        <createTable tableName="handmade_tag">
+            <column name="id" type="bigint" defaultValueComputed="nextval('handmade_tag_seq')">
+                <constraints primaryKey="true" foreignKeyName="handmade_tag_fk"/>
             </column>
             <column name="title" type="varchar(30)" />
             <column name="description" type="text" />

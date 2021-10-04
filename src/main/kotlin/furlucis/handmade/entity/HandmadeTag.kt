@@ -3,8 +3,8 @@ package furlucis.handmade.entity
 import javax.persistence.*
 
 @Entity
-@Table(name = "handmade_type")
-data class HandmadeType(
+@Table(name = "handmade_tag")
+data class HandmadeTag(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

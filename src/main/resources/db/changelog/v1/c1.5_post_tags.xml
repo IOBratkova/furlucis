@@ -1,0 +1,30 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <property name="blob_type" value="bytea" dbms="postgresql"/>
+
+
+    <changeSet id="04102021-1418" author="bratckova">
+
+        <createTable tableName="post_tags">
+            <column name="post_id" type="bigint" />
+            <column name="handmade_tag_id" type="bigint" />
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="post_id"
+                                 baseTableName="post_tags"
+                                 constraintName="post_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="post"/>
+
+        <addForeignKeyConstraint baseColumnNames="handmade_tag_id"
+                                 baseTableName="post_tags"
+                                 constraintName="handmade_tag_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="handmade_tag"/>
+
+    </changeSet>
+
+</databaseChangeLog>

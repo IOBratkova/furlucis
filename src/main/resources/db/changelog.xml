@@ -3,8 +3,9 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
-    <include file="changelog/v1/c1.1_handmade_type.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v1/c1.1_handmade_tag.xml" relativeToChangelogFile="true"/>
     <include file="changelog/v1/c1.2_user_credentials.xml" relativeToChangelogFile="true"/>
     <include file="changelog/v1/c1.3_user_info.xml" relativeToChangelogFile="true"/>
     <include file="changelog/v1/c1.4_post.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v1/c1.5_post_tags.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
