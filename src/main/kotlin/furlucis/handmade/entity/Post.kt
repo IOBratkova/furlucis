@@ -17,7 +17,7 @@ data class Post(
     @Column(name = "text", length = 1000)
     var text: String? = null,
 
-    @Column(name = "type", length = 1000)
+    @Column(name = "type")
     var type: String? = null,
 
     @ManyToOne

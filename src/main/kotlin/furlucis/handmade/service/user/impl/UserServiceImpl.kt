@@ -18,4 +18,11 @@ class UserServiceImpl @Autowired constructor(
                 return userInfoRepo.save(userInfo)
         }
 
+        override fun findById(id: Long): UserInfo {
+                return userInfoRepo.findById(id).orElseThrow {
+//                        TODO: Exception
+                        NullPointerException()
+                }
+        }
+
 }
