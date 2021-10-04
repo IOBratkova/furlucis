@@ -14,5 +14,8 @@ data class HandmadeTag(
     var title: String? = null,
 
     @Column(name = "description", length = 1000)
-    var description: String? = null
+    var description: String? = null,
+
+    @ManyToMany(mappedBy = "tags")
+    var posts: Set<Post>? = null
 )

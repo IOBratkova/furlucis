@@ -28,5 +28,13 @@ data class Post(
     var created: Date? = null,
 
     @Column(name = "updated")
-    var updated: Date? = null
+    var updated: Date? = null,
+
+    @ManyToMany
+    @JoinTable(
+        name = "post_tags",
+        joinColumns = [JoinColumn(name = "post_id", referencedColumnName = "id")],
+        inverseJoinColumns = [JoinColumn(name = "handmade_tag_id", referencedColumnName = "id")]
+    )
+    var tags: Set<HandmadeTag>? = null,
 )
