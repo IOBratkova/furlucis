@@ -1,7 +1,6 @@
 package furlucis.handmade.rest.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import javax.validation.constraints.NotNull
 
 class NewPostDto (
 
@@ -18,6 +17,9 @@ class NewPostDto (
     val type: String? = null,
 
     @JsonProperty("userInfoId")
-    val userInfoId: Long? = null
+    val userInfoId: Long? = null,
+
+    @JsonProperty("tags")
+    val tags: List<HandmadeTagDto>? = null
 
 )
