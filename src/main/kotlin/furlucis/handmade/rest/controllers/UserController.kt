@@ -3,7 +3,7 @@ package furlucis.handmade.rest.controllers
 import furlucis.handmade.rest.dto.IdentifierDto
 import furlucis.handmade.rest.dto.UserInfoDto
 import furlucis.handmade.rest.mappers.UserMapper
-import furlucis.handmade.service.user.UserCredentialsService
+import furlucis.handmade.service.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("v1/user")
 class UserController @Autowired constructor(
     private val userMapper: UserMapper,
-    private val userCredentialService: UserCredentialsService
+    private val userCredentialService: UserService
 ) {
 
     @PostMapping("/save")

@@ -6,18 +6,18 @@ import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.exceptions.*
 import furlucis.handmade.repositories.UserCredentialsRepo
 import furlucis.handmade.repositories.UserInfoRepo
-import furlucis.handmade.service.user.UserCredentialsService
+import furlucis.handmade.service.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class UserCredentialsServiceImpl @Autowired constructor(
+class UserServiceImpl @Autowired constructor(
         private val passwordEncoder: PasswordEncoder,
         private val userCredentialsRepo: UserCredentialsRepo,
         private val userInfoRepo: UserInfoRepo
-): UserCredentialsService {
+): UserService {
 
     override fun save(userInfo: UserInfo): UserInfo {
         userInfo.created = Date()

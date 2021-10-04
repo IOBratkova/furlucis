@@ -3,7 +3,7 @@ package furlucis.handmade.service.user
 import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.entity.UserInfo
 
-interface UserCredentialsService {
+interface UserService {
     fun save(userInfo: UserInfo) : UserInfo
     fun save(userCredentials: UserCredentials) : UserCredentials
     fun save(userCredentials: UserCredentials, userInfo: UserInfo) : UserCredentials
