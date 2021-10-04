@@ -33,6 +33,7 @@ class SecurityConfig @Autowired constructor(
                 .antMatchers("/v1/test/user").hasRole("USER")
                 .antMatchers("/v1/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/v1/post/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/v1/post/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/v1/auth/**").permitAll()
                 .antMatchers("/v1/test/full-permit").permitAll()
 

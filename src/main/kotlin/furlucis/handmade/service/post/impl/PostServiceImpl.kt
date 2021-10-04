@@ -1,6 +1,7 @@
 package furlucis.handmade.service.post.impl
 
 import furlucis.handmade.entity.Post
+import furlucis.handmade.exceptions.UserIdException
 import furlucis.handmade.repositories.PostRepo
 import furlucis.handmade.service.post.PostService
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,9 +12,21 @@ import java.util.*
 class PostServiceImpl @Autowired constructor(
         private val postRepo: PostRepo
 ): PostService {
+
         override fun save(post: Post): Post {
                 post.created = Date()
                 post.updated = post.created
                 return postRepo.save(post)
+        }
+
+        override fun findAllByUserId(id: Long): List<Post> {
+                return postRepo.findAllByUserInfoId(id)
+        }
+
+        override fun findById(id: Long) : Post {
+                return postRepo.findById(id).orElseThrow{
+                        throw NullPointerException()
+                        //TODO EXCEPTIOn
+                }
         }
 }

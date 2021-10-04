@@ -7,5 +7,5 @@ import java.util.*
 
 @Repository
 interface PostRepo : JpaRepository<Post, Long>{
-    override fun findById(id: Long) : Optional<Post>
+    fun findAllByUserInfoId(id: Long) : List<Post>
 }
