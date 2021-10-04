@@ -1,10 +1,4 @@
-    UserServiceImpl:
-
-    override fun getByLogin(login: String): User {
-        val user = userRepo.findByLogin(login)?: throw NullPointerException()
-        return (user ?: null) as User
-    }
-
-    исключение!!!!!!!
-
-    исключения в save: Handmadetype, UserCridentials
+Пользоватль может выкладывать посты типа История или Урок.
+Пост содержит теги.
+Если пользователь не нашел подходящего тега, то он может создать его.
+Теги необходипо писать через пробел или нижние почеркивание

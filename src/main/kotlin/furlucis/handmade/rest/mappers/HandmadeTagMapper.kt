@@ -5,10 +5,8 @@ import furlucis.handmade.rest.dto.HandmadeTagDto
 import org.mapstruct.Mapper
 
 @Mapper(componentModel = "spring", uses = [UserMapper::class])
-interface TagMapper {
-
+interface HandmadeTagMapper {
     fun toHandmadeTag(tag: HandmadeTagDto) : HandmadeTag
-
-    fun toSetHandmadeTag(tag: List<HandmadeTagDto>) : Set<HandmadeTag>
-
+    fun toSetHandmadeTag(tags: List<HandmadeTagDto>) : Set<HandmadeTag>
+    fun toListHandmadeTagDto(tags: List<HandmadeTag>) : List<HandmadeTagDto>
 }

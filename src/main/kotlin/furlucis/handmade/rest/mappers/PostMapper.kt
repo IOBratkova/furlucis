@@ -6,7 +6,7 @@ import furlucis.handmade.rest.dto.PostDto
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 
-@Mapper(componentModel = "spring", uses = [UserMapper::class, TagMapper::class])
+@Mapper(componentModel = "spring", uses = [UserMapper::class, HandmadeTagMapper::class])
 interface PostMapper {
 
     @Mapping(source = "userInfo.id", target = "userInfoId")
