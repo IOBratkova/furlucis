@@ -27,4 +27,6 @@ interface UserMapper {
     )
     fun toUserInfo(userInfoDto: UserInfoDto, userCredentials: UserCredentials) : UserInfo
 
+    fun toUserInfo(userCredentials: UserCredentials) : UserInfo
+
 }

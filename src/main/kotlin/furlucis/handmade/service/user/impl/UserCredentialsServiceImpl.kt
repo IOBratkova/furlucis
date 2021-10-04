@@ -27,6 +27,23 @@ class UserCredentialsServiceImpl @Autowired constructor(
             throw EmailRegistrationException(userCredentials.email)
         }
         val userInfo = UserInfo(userCredentials.id, userCredentials, null, null, null, null, null, null, null, null)
+        return setUserCredentials(userCredentials, userInfo)
+    }
+
+    override fun save(userCredentials: UserCredentials, userInfo: UserInfo): UserCredentials {
+        if (userCredentialsRepo.existsByUsername(userCredentials.username)) {
+            throw UsernameRegistrationException(userCredentials.username)
+        }
+        if (userCredentialsRepo.existsByEmail(userCredentials.email)) {
+            throw EmailRegistrationException(userCredentials.email)
+        }
+        return setUserCredentials(userCredentials, userInfo)
+    }
+
+    private fun setUserCredentials(
+        userCredentials: UserCredentials,
+        userInfo: UserInfo
+    ): UserCredentials {
         userCredentials.role = RoleEnum.USER.text
         userCredentials.password = passwordEncoder.encode(userCredentials.password)
         userCredentials.created = Date()

@@ -1,9 +1,11 @@
 package furlucis.handmade.service.user
 
 import furlucis.handmade.entity.UserCredentials
+import furlucis.handmade.entity.UserInfo
 
 interface UserCredentialsService {
     fun save(userCredentials: UserCredentials) : UserCredentials
+    fun save(userCredentials: UserCredentials, userInfo: UserInfo) : UserCredentials
 
     fun existsByUsername(username: String) : Boolean
     fun existsByEmail(email: String) : Boolean

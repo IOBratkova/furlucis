@@ -1,6 +1,7 @@
 package furlucis.handmade.rest.mappers
 
 import furlucis.handmade.entity.UserCredentials
+import furlucis.handmade.entity.UserInfo
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.rest.dto.RegisterRequestDto
 import furlucis.handmade.rest.dto.UserCredentialsDto
