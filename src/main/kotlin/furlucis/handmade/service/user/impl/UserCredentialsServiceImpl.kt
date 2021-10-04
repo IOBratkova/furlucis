@@ -5,8 +5,8 @@ import furlucis.handmade.entity.UserInfo
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.exceptions.*
 import furlucis.handmade.repositories.UserCredentialsRepo
+import furlucis.handmade.repositories.UserInfoRepo
 import furlucis.handmade.service.user.UserCredentialsService
-import furlucis.handmade.service.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -16,8 +16,14 @@ import java.util.*
 class UserCredentialsServiceImpl @Autowired constructor(
         private val passwordEncoder: PasswordEncoder,
         private val userCredentialsRepo: UserCredentialsRepo,
-        private val userService: UserService
+        private val userInfoRepo: UserInfoRepo
 ): UserCredentialsService {
+
+    override fun save(userInfo: UserInfo): UserInfo {
+        userInfo.created = Date()
+        userInfo.updated = userInfo.created
+        return userInfoRepo.save(userInfo)
+    }
 
     override fun save(userCredentials: UserCredentials): UserCredentials {
         if (userCredentialsRepo.existsByUsername(userCredentials.username)) {
@@ -51,7 +57,7 @@ class UserCredentialsServiceImpl @Autowired constructor(
         userInfo.created = userCredentials.created
         userInfo.updated = userCredentials.updated
         userCredentialsRepo.save(userCredentials)
-        userService.save(userInfo)
+        save(userInfo)
         return userCredentials
     }
 

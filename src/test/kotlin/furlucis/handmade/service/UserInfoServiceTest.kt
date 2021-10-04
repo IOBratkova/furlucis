@@ -2,7 +2,6 @@ package furlucis.handmade.service
 
 import furlucis.handmade.HandmadeApplicationTests
 import furlucis.handmade.entity.UserInfo
-import furlucis.handmade.service.user.UserService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
