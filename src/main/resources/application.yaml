@@ -22,3 +22,6 @@ spring:
 images:
   avatar: /Users/bratckovaio/Documents/Projects/furlucis/src/main/resources/avatar
   save: true
+
+jwt:
+  expiration: 604800000
