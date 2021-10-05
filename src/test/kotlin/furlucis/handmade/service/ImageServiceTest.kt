@@ -35,4 +35,11 @@ class ImageServiceTest @Autowired constructor(
         }
         Assertions.assertEquals(thrown.message, "Пользователя с id 0 не существует.")
     }
+
+    @Test
+    fun `save user avatar` () {
+        val avatar = getMultipartFile()
+        val result = imageService.saveAvatar(avatar, 1L)
+        Assertions.assertNotNull(result)
+    }
 }

@@ -19,13 +19,15 @@ class ImageServiceImpl @Autowired constructor(
     @Value("\${images.avatar}")
     private val avatarPath: String = ""
 
+    @Value("\${images.save}")
+    private val save: Boolean = true
+
     override fun saveAvatar(file: MultipartFile, userId: Long): String {
         val userInfo = userService.findUserInfoById(userId)
-        val path = prepareImageFile(file, avatarPath)
-        writeFile(path, file)
-        userInfo.avatar = path.toUri().toString()
+        val path = loadFile(file, avatarPath, save)
+        userInfo.avatar = path
         userService.save(userInfo).id!!
-        return path.toUri().toString()
+        return path
     }
 
 

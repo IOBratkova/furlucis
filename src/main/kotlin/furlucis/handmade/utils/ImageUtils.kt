@@ -5,10 +5,12 @@ import org.springframework.web.multipart.MultipartFile
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.net.URI
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.*
+import javax.xml.stream.Location
 
 private val extensions: Array<String> = arrayOf("jpg", "png", "jpeg")
 
@@ -33,6 +35,21 @@ fun createDir(path: String) {
     }
 }
 
+fun loadFile(file: MultipartFile, location: String, save: Boolean) : String {
+    if (file.isEmpty && file.originalFilename == null) {
+        throw NullPointerException() //TODO ex
+    }
+    val extension = getImageFileExtension(file.originalFilename!!)
+    val filePath = getFilePath(location)
+    if (save) {
+        createDir(filePath)
+        val path = Files.createFile(Paths.get(filePath + "/" + file.hashCode() + "." + extension))
+        writeFile(path, file)
+        return path.toUri().toString()
+    }
+    return "/default"
+}
+
 fun prepareImageFile(file: MultipartFile, path: String) : Path {
     if (file.isEmpty && file.originalFilename == null) {
         throw NullPointerException() //TODO ex
@@ -52,3 +69,4 @@ fun writeFile(path: Path, file: MultipartFile) {
     stream.write(bytes)
     stream.close()
 }
+

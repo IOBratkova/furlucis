@@ -9,4 +9,4 @@ spring:
 
 images:
   avatar: /Users/bratckovaio/Documents/Projects/furlucis/src/test/resources/avatar
-  save: true
+  save: false
