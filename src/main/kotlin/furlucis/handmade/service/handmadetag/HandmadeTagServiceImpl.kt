@@ -1,6 +1,8 @@
 package furlucis.handmade.service.handmadetag
 
 import furlucis.handmade.entity.HandmadeTag
+import furlucis.handmade.exceptions.ExistsHandmadeTagException
+import furlucis.handmade.exceptions.IncorrectHandmadeTagException
 import furlucis.handmade.repositories.HandmadeTagRepo
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -12,11 +14,11 @@ class HandmadeTagServiceImpl @Autowired constructor(
 
         override fun save(tag: HandmadeTag): HandmadeTag {
                 if (tag.title == null) {
-                        throw NullPointerException() //TODO: ex
+                        throw IncorrectHandmadeTagException()
                 }
                 tag.title = tag.title!!.replace("\\pP", " ")
                 if (existsByTitle(tag.title!!)) {
-                        throw NullPointerException() //TODO: ex
+                        throw ExistsHandmadeTagException(tag.title!!)
                 }
                 return handmadeTagRepo.save(tag)
         }
