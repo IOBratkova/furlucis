@@ -13,11 +13,12 @@ import java.util.*
 private val extensions: Array<String> = arrayOf("jpg", "png", "jpeg")
 
 fun getFilePath(imagePath: String) : String {
-    return imagePath + Date().toString()
+    val date = Date()
+    return imagePath + "/" + date.day + date.month + date.year
 }
 
 fun getImageFileExtension(filename: String) : String {
-    val filenameArray = filename.split("\\.")
+    val filenameArray = filename.split("\\pP".toRegex())
     val len = filenameArray.size - 1
     if (filenameArray[len] !in extensions) {
         throw NullPointerException() //TODO ex
@@ -26,7 +27,7 @@ fun getImageFileExtension(filename: String) : String {
 }
 
 fun createDir(path: String) {
-    val newPath = Paths.get(getFilePath(path))
+    val newPath = Paths.get(path)
     if (!Files.exists(newPath)) {
         Files.createDirectories(newPath)
     }

@@ -17,11 +17,10 @@ spring:
     url: ${spring.datasource.url}
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
-    drop-first: true
+    drop-first: false
 
-images:
-  avatar: classpath:/image/avatar
-
-jwt:
-  secret: FurlucisFurLucisFurLucis
-  expiration: 604800000
+#images: classpath:/image/avatar
+#
+#jwt:
+#  secret: FurlucisFurLucisFurLucis
+#  expiration: 604800000
