@@ -2,6 +2,7 @@ package furlucis.handmade.service
 
 import furlucis.handmade.HandmadeApplicationTests
 import furlucis.handmade.entity.UserCredentials
+import furlucis.handmade.entity.UserInfo
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.exceptions.*
 import furlucis.handmade.service.user.UserService
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class UserCredentialServiceTest @Autowired constructor(
+class UserServiceTest @Autowired constructor(
     private val userService: UserService
 ) : HandmadeApplicationTests() {
 
@@ -299,6 +300,24 @@ class UserCredentialServiceTest @Autowired constructor(
     fun `user exist by email`() {
         val result = userService.existsByEmail("email@email.ru")
         Assertions.assertTrue(result)
+    }
+
+    @Test
+    fun `save user info` () {
+        val credentials = userCredentialsRepo.findById(1L).get()
+        val userInfo = UserInfo(
+            credentials.userInfo!!.id!!,
+            credentials,
+            "firdt",
+            "second",
+            "patr",
+            "desc",
+            "kijk",
+            null,
+            null
+        )
+        val result = userService.save(userInfo)
+        Assertions.assertEquals(result.id, 1L)
     }
 
 }
