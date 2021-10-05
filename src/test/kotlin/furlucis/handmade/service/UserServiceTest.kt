@@ -16,7 +16,6 @@ class UserServiceTest @Autowired constructor(
     private val userService: UserService
 ) : HandmadeApplicationTests() {
 
-
     @Test
     fun `do not find incomplete registration user` () {
         val thrown = Assertions.assertThrows(CompleteRegistrationException::class.java) {

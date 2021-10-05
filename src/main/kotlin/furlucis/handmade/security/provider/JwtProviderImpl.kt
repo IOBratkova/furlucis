@@ -9,11 +9,9 @@ import java.util.*
 
 @Service
 class JwtProviderImpl : JwtProvider {
-    @Value("$(jwt.secret)")
-    private val jwtSecret: String = ""
 
-//    @Value("$(jwt.expiration)")
-    private val jwtExpiration: Int = 604800000
+    @Value("\${jwt.expiration}")
+    private val jwtExpiration: Int = 0
 
     private val secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256)
 
