@@ -1,16 +1,12 @@
 package furlucis.handmade.utils
 
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.multipart.MultipartFile
 import java.io.BufferedOutputStream
-import java.io.File
 import java.io.FileOutputStream
-import java.net.URI
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.*
-import javax.xml.stream.Location
 
 private val extensions: Array<String> = arrayOf("jpg", "png", "jpeg")
 
@@ -35,6 +31,16 @@ fun createDir(path: String) {
     }
 }
 
+fun writeFile(path: Path, file: MultipartFile) {
+    if (!Files.exists(path)) {
+        throw NullPointerException() //TODO ex
+    }
+    val stream = BufferedOutputStream(FileOutputStream(path.toFile()))
+    val bytes = file.bytes
+    stream.write(bytes)
+    stream.close()
+}
+
 fun loadFile(file: MultipartFile, location: String, save: Boolean) : String {
     if (file.isEmpty && file.originalFilename == null) {
         throw NullPointerException() //TODO ex
@@ -50,23 +56,4 @@ fun loadFile(file: MultipartFile, location: String, save: Boolean) : String {
     return "/default"
 }
 
-fun prepareImageFile(file: MultipartFile, path: String) : Path {
-    if (file.isEmpty && file.originalFilename == null) {
-        throw NullPointerException() //TODO ex
-    }
-    val extension = getImageFileExtension(file.originalFilename!!)
-    val filePath = getFilePath(path)
-    createDir(filePath)
-    return Files.createFile(Paths.get(filePath + "/" + file.hashCode() + "." + extension))
-}
-
-fun writeFile(path: Path, file: MultipartFile) {
-    if (!Files.exists(path)) {
-        throw NullPointerException() //TODO ex
-    }
-    val stream = BufferedOutputStream(FileOutputStream(path.toFile()))
-    val bytes = file.bytes
-    stream.write(bytes)
-    stream.close()
-}
 
