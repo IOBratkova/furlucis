@@ -15,7 +15,9 @@ class ImageServiceImpl @Autowired constructor(
 ): ImageService {
 
     //TODO: Необходимо понять, какого черта не работают пропертис для кастомных конфигов
-    private val avatarPath: String = "/Users/bratckovaio/Documents/Projects/furlucis/src/main/resources/image/avatar"
+//    private val avatarPath: String = "/Users/bratckovaio/Documents/Projects/furlucis/src/main/resources/image/avatar"
+    @Value("\${images.avatar}")
+    private val avatarPath: String = ""
 
     override fun saveAvatar(file: MultipartFile, userId: Long): String {
         val userInfo = userService.findUserInfoById(userId)

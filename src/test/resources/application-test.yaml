@@ -7,3 +7,6 @@ spring:
   liquibase:
     drop-first: true
 
+images:
+  avatar: /Users/bratckovaio/Documents/Projects/furlucis/src/test/resources/avatar
+  save: true
