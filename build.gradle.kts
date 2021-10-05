@@ -61,6 +61,8 @@ dependencies {
 
 	implementation("org.springdoc", "springdoc-openapi-kotlin", springDocVersion)
 	implementation("org.springdoc", "springdoc-openapi-ui", springDocVersion)
+
+	implementation ("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 tasks.withType<KotlinCompile> {

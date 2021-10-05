@@ -19,6 +19,9 @@ spring:
     password: ${spring.datasource.password}
     drop-first: true
 
+images:
+  avatar: classpath:/image/avatar
+
 jwt:
   secret: FurlucisFurLucisFurLucis
   expiration: 604800000

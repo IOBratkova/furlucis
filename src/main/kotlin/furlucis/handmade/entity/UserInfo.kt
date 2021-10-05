@@ -32,7 +32,7 @@ data class UserInfo(
     val description: String?,
 
     @Column(name = "avatar")
-    val avatar: String? = null,
+    var avatar: String? = null,
 
     @OneToMany(mappedBy = "userInfo")
     val posts: List<Post>? = null,

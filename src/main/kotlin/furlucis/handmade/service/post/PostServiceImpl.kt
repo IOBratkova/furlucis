@@ -1,4 +1,4 @@
-package furlucis.handmade.service.post.impl
+package furlucis.handmade.service.post
 
 import furlucis.handmade.entity.Post
 import furlucis.handmade.exceptions.PostIdException

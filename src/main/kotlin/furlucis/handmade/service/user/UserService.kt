@@ -2,6 +2,7 @@ package furlucis.handmade.service.user
 
 import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.entity.UserInfo
+import org.springframework.web.multipart.MultipartFile
 
 interface UserService {
     fun save(userInfo: UserInfo) : UserInfo
@@ -23,4 +24,5 @@ interface UserService {
     fun findByUsername(username: String) : UserCredentials
     fun findByEmail(email: String) : UserCredentials
     fun findById(id: Long) : UserCredentials
+    fun findUserInfoById(id: Long) : UserInfo
 }

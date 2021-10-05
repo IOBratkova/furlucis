@@ -15,9 +15,6 @@ class UserInfoDto (
     @JsonProperty("description")
     val description: String?,
 
-    @JsonProperty("avatar")
-    val avatar: String?,
-
     @JsonProperty("id")
     var id: Long?,
 

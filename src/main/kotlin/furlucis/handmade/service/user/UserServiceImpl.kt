@@ -1,4 +1,4 @@
-package furlucis.handmade.service.user.impl
+package furlucis.handmade.service.user
 
 import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.entity.UserInfo
@@ -88,6 +88,14 @@ class UserServiceImpl @Autowired constructor(
             .orElseThrow{
                 UserIdException(id)
             }
+    }
+
+    override fun findUserInfoById(id: Long): UserInfo {
+        val user = findById(id)
+        if (user.userInfo == null) {
+            throw UserIdException(id)
+        }
+        return user.userInfo!!
     }
 
     override fun updateUsername(id: Long, username: String): UserCredentials {

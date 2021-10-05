@@ -1,8 +1,7 @@
-package furlucis.handmade.service.handmadetag.impl
+package furlucis.handmade.service.handmadetag
 
 import furlucis.handmade.entity.HandmadeTag
 import furlucis.handmade.repositories.HandmadeTagRepo
-import furlucis.handmade.service.handmadetag.HandmadeTagService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
