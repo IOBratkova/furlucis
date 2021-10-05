@@ -1,5 +1,8 @@
 package furlucis.handmade.utils
 
+import furlucis.handmade.exceptions.EmptyFileException
+import furlucis.handmade.exceptions.FileNotFoundException
+import furlucis.handmade.exceptions.NotValidExtensionException
 import org.springframework.web.multipart.MultipartFile
 import java.io.BufferedOutputStream
 import java.io.FileOutputStream
@@ -19,7 +22,7 @@ fun getImageFileExtension(filename: String) : String {
     val filenameArray = filename.split("\\pP".toRegex())
     val len = filenameArray.size - 1
     if (filenameArray[len] !in extensions) {
-        throw NullPointerException() //TODO ex
+        throw NotValidExtensionException()
     }
     return filenameArray[len]
 }
@@ -33,7 +36,7 @@ fun createDir(path: String) {
 
 fun writeFile(path: Path, file: MultipartFile) {
     if (!Files.exists(path)) {
-        throw NullPointerException() //TODO ex
+        throw FileNotFoundException()
     }
     val stream = BufferedOutputStream(FileOutputStream(path.toFile()))
     val bytes = file.bytes
@@ -43,7 +46,7 @@ fun writeFile(path: Path, file: MultipartFile) {
 
 fun loadFile(file: MultipartFile, location: String, save: Boolean) : String {
     if (file.isEmpty && file.originalFilename == null) {
-        throw NullPointerException() //TODO ex
+        throw EmptyFileException()
     }
     val extension = getImageFileExtension(file.originalFilename!!)
     val filePath = getFilePath(location)
