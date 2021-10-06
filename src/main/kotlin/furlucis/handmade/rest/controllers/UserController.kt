@@ -14,21 +14,21 @@ import org.springframework.web.multipart.MultipartFile
 @RequestMapping("v1/user")
 class UserController @Autowired constructor(
     private val userMapper: UserMapper,
-    private val userCredentialService: UserService,
+    private val userService: UserService,
     private val imageService: ImageService
 ) {
 
     @PostMapping("/save")
     fun saveUserInfo(@RequestBody userInfoDto: UserInfoDto) : IdentifierDto<Long> {
-        val credentials = userCredentialService.findById(userInfoDto.userCredentialsId)
+        val credentials = userService.findByUserCredentialsId(userInfoDto.userCredentialsId).userCredentials!!
         val userInfo = userMapper.toUserInfo(userInfoDto, credentials)
-        return IdentifierDto(userCredentialService.save(userInfo).id!!)
+        return IdentifierDto(userService.save(userInfo).id!!)
     }
 
     @PostMapping("/{userId}/avatar")
     fun saveAvatar(@RequestParam multiPartFile: MultipartFile, @PathVariable userId: Long) : AvatarDto {
-        val res = imageService.saveAvatar(multiPartFile, userId)
-        return AvatarDto(res, userId)
+        val res = userService.saveAvatar(multiPartFile, userId)
+        return AvatarDto(res.avatar!!, userId)
     }
 
 

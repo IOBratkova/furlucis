@@ -18,24 +18,26 @@ class ImageServiceTest @Autowired constructor(
 
     private val testImage = "/Users/bratckovaio/Documents/Projects/furlucis/src/test/resources/test_ava.png"
 
-    fun getMultipartFile() : MultipartFile {
-        val inputStream = FileInputStream(testImage)
+    fun getMultipartFile(inputStream: FileInputStream) : MultipartFile {
         return MockMultipartFile(testImage, testImage, null, inputStream)
     }
 
-    @Test
-    fun `do not save user avatar` () {
-        val avatar = getMultipartFile()
-        val thrown = Assertions.assertThrows(UserIdException::class.java) {
-            imageService.saveAvatar(avatar, 0L)
-        }
-        Assertions.assertEquals(thrown.message, "Пользователя с id 0 не существует.")
-    }
+//    TODO: как-то записать замоканный пустой файл
+//    @Test
+//    fun `do not save user avatar` () {
+//        val inputStream = FileInputStream(null as String)
+//        val avatar = getMultipartFile(inputStream)
+//        val thrown = Assertions.assertThrows(UserIdException::class.java) {
+//            imageService.saveAvatar(avatar)
+//        }
+//        Assertions.assertEquals(thrown.message, "Пользователя с id 0 не существует.")
+//    }
 
     @Test
-    fun `save user avatar` () {
-        val avatar = getMultipartFile()
-        val result = imageService.saveAvatar(avatar, 1L)
+    fun `save avatar` () {
+        val inputStream = FileInputStream(testImage)
+        val avatar = getMultipartFile(inputStream)
+        val result = imageService.saveAvatar(avatar)
         Assertions.assertNotNull(result)
     }
 }
