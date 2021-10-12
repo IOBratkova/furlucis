@@ -1,8 +1,10 @@
 package furlucis.handmade
 
+import furlucis.handmade.entity.HandmadeTag
 import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.entity.UserInfo
 import furlucis.handmade.enums.RoleEnum
+import furlucis.handmade.repositories.HandmadeTagRepo
 import furlucis.handmade.repositories.UserCredentialsRepo
 import furlucis.handmade.repositories.UserInfoRepo
 import org.junit.jupiter.api.BeforeAll
@@ -20,6 +22,9 @@ class HandmadeApplicationTests {
 
 	@Autowired
 	lateinit var userInfoRepo: UserInfoRepo
+
+	@Autowired
+	lateinit var handmadeTagRepo: HandmadeTagRepo
 
 	@BeforeAll
 	fun setData() {
@@ -112,5 +117,8 @@ class HandmadeApplicationTests {
 		userCredentialsRepo.save(userCredentials)
 	}
 
+	fun createHandmadeTag() {
+		var tag = HandmadeTag(null, "ловец снов", "амулет", null)
 
+	}
 }
