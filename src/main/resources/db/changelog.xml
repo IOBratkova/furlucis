@@ -8,4 +8,5 @@
     <include file="changelog/v1/c1.3_user_info.xml" relativeToChangelogFile="true"/>
     <include file="changelog/v1/c1.4_post.xml" relativeToChangelogFile="true"/>
     <include file="changelog/v1/c1.5_post_tags.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/v1/c1.6_update_user_credentials.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

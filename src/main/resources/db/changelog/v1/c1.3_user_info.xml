@@ -32,7 +32,7 @@
 
         <addForeignKeyConstraint baseColumnNames="user_credentials_id"
                                  baseTableName="user_info"
-                                 constraintName="user_credentials_fk"
+                                 constraintName="info2credentials_fk"
                                  referencedColumnNames="id"
                                  referencedTableName="user_credentials"/>
     </changeSet>
