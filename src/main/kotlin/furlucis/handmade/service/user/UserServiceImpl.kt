@@ -1,6 +1,6 @@
 package furlucis.handmade.service.user
 
-import furlucis.handmade.entity.UserInfo
+import furlucis.handmade.entity.User
 import furlucis.handmade.exceptions.UserIdException
 import furlucis.handmade.repositories.UserInfoRepo
 import furlucis.handmade.service.image.ImageService
@@ -15,25 +15,25 @@ class UserServiceImpl @Autowired constructor(
         private val imageService: ImageService
 ): UserService {
 
-    override fun save(userInfo: UserInfo): UserInfo {
-        userInfo.created = Date()
-        userInfo.updated = userInfo.created
-        return userInfoRepo.save(userInfo)
+    override fun save(user: User): User {
+        user.created = Date()
+        user.updated = user.created
+        return userInfoRepo.save(user)
     }
 
-    override fun findUserInfoById(id: Long): UserInfo {
+    override fun findUserInfoById(id: Long): User {
         return userInfoRepo.findById(id).orElseThrow {
             throw UserIdException(id)
         }
     }
 
-    override fun findByUserCredentialsId(id: Long): UserInfo {
+    override fun findByUserCredentialsId(id: Long): User {
         return userInfoRepo.findByUserCredentialsId(id).orElseThrow {
             throw UserIdException(id)
         }
     }
 
-    override fun saveAvatar(file: MultipartFile, userId: Long): UserInfo {
+    override fun saveAvatar(file: MultipartFile, userId: Long): User {
         val userInfo = findByUserCredentialsId(userId)
         val path = imageService.saveAvatar(file)
         userInfo.avatar = path

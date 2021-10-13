@@ -1,7 +1,7 @@
 package furlucis.handmade.rest.mappers
 
 import furlucis.handmade.entity.UserCredentials
-import furlucis.handmade.entity.UserInfo
+import furlucis.handmade.entity.User
 import furlucis.handmade.rest.dto.UserInfoDto
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
@@ -11,10 +11,10 @@ import org.mapstruct.Mappings
 interface UserMapper {
 
     @Mapping(source = "userCredentialsId", target = "userCredentials.id")
-    fun toUserInfo(userInfoDto: UserInfoDto) : UserInfo
+    fun toUserInfo(userInfoDto: UserInfoDto) : User
 
     @Mapping(source = "userCredentials.id", target = "userCredentialsId")
-    fun toUserInfoDto(userInfo: UserInfo) : UserInfoDto
+    fun toUserInfoDto(user: User) : UserInfoDto
 
     @Mappings(
         Mapping(source = "userCredentials", target = "userCredentials"),
@@ -25,8 +25,8 @@ interface UserMapper {
         Mapping(target = "avatar", ignore = true),
         Mapping(source = "userCredentials.userInfo.id", target = "id")
     )
-    fun toUserInfo(userInfoDto: UserInfoDto, userCredentials: UserCredentials) : UserInfo
+    fun toUserInfo(userInfoDto: UserInfoDto, userCredentials: UserCredentials) : User
 
-    fun toUserInfo(userCredentials: UserCredentials) : UserInfo
+    fun toUserInfo(userCredentials: UserCredentials) : User
 
 }

@@ -1,7 +1,7 @@
 package furlucis.handmade.service.registration
 
 import furlucis.handmade.entity.UserCredentials
-import furlucis.handmade.entity.UserInfo
+import furlucis.handmade.entity.User
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.exceptions.*
 import furlucis.handmade.repositories.UserCredentialsRepo
@@ -25,32 +25,32 @@ class RegistrationServiceImpl @Autowired constructor(
                 if (userCredentialsRepo.existsByEmail(userCredentials.email)) {
                         throw EmailRegistrationException(userCredentials.email)
                 }
-                val userInfo = UserInfo(userCredentials.id, userCredentials, null, null, null, null, null, null, null, null)
-                return setUserCredentials(userCredentials, userInfo)
+                val user = User(userCredentials.id, userCredentials, null, null, null, null, null, null, null, null)
+                return setUserCredentials(userCredentials, user)
         }
 
-        override fun save(userCredentials: UserCredentials, userInfo: UserInfo): UserCredentials {
+        override fun save(userCredentials: UserCredentials, user: User): UserCredentials {
                 if (userCredentialsRepo.existsByUsername(userCredentials.username)) {
                         throw UsernameRegistrationException(userCredentials.username)
                 }
                 if (userCredentialsRepo.existsByEmail(userCredentials.email)) {
                         throw EmailRegistrationException(userCredentials.email)
                 }
-                return setUserCredentials(userCredentials, userInfo)
+                return setUserCredentials(userCredentials, user)
         }
 
         private fun setUserCredentials(
-                userCredentials: UserCredentials,
-                userInfo: UserInfo
+            userCredentials: UserCredentials,
+            user: User
         ): UserCredentials {
                 userCredentials.role = RoleEnum.USER.text
                 userCredentials.password = passwordEncoder.encode(userCredentials.password)
                 userCredentials.created = Date()
                 userCredentials.updated = userCredentials.created
-                userInfo.created = userCredentials.created
-                userInfo.updated = userCredentials.updated
+                user.created = userCredentials.created
+                user.updated = userCredentials.updated
                 userCredentialsRepo.save(userCredentials)
-                userService.save(userInfo)
+                userService.save(user)
                 return userCredentials
         }
 
@@ -65,7 +65,7 @@ class RegistrationServiceImpl @Autowired constructor(
 
         override fun findIncompleteRegistration(id: Long): UserCredentials {
                 val credentials = findById(id)
-                if (credentials.userInfo != null) {
+                if (credentials.user != null) {
                         throw CompleteRegistrationException(credentials.username)
                 }
                 return credentials
@@ -73,7 +73,7 @@ class RegistrationServiceImpl @Autowired constructor(
 
         override fun findCompleteRegistration(id: Long): UserCredentials {
                 val credentials = findById(id)
-                if (credentials.userInfo == null) {
+                if (credentials.user == null) {
                         throw IncompleteRegistrationException(credentials.username)
                 }
                 return credentials

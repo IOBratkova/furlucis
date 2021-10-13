@@ -22,7 +22,7 @@ data class Post(
 
     @ManyToOne
     @JoinColumn(name = "user_info_id")
-    var userInfo: UserInfo? = null,
+    var user: User? = null,
 
     @Column(name = "created")
     var created: Date? = null,

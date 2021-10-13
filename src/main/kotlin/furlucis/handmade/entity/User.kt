@@ -9,7 +9,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "user_info")
 @EntityListeners(AuditingEntityListener::class)
-data class UserInfo(
+data class User(
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ data class UserInfo(
     @Column(name = "avatar")
     var avatar: String? = null,
 
-    @OneToMany(mappedBy = "userInfo")
+    @OneToMany(mappedBy = "user")
     val posts: List<Post>? = null,
 
     @CreatedDate

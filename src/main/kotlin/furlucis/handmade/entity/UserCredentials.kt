@@ -26,7 +26,7 @@ data class UserCredentials(
     var role: String,
 
     @OneToOne(mappedBy = "userCredentials")
-    var userInfo: UserInfo? = null,
+    var user: User? = null,
 
     @Column(name = "created")
     var created: Date? = null,

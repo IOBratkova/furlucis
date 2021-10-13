@@ -1,11 +1,8 @@
 package furlucis.handmade.service
 
 import furlucis.handmade.HandmadeApplicationTests
-import furlucis.handmade.entity.UserCredentials
-import furlucis.handmade.entity.UserInfo
-import furlucis.handmade.enums.RoleEnum
+import furlucis.handmade.entity.User
 import furlucis.handmade.exceptions.*
-import furlucis.handmade.service.registration.RegistrationService
 import furlucis.handmade.service.user.UserService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -30,8 +27,8 @@ class UserServiceTest @Autowired constructor(
     @Test
     fun `save user info` () {
         val credentials = userCredentialsRepo.findById(1L).get()
-        val userInfo = UserInfo(
-            credentials.userInfo!!.id!!,
+        val user = User(
+            credentials.user!!.id!!,
             credentials,
             "firdt",
             "second",
@@ -41,7 +38,7 @@ class UserServiceTest @Autowired constructor(
             null,
             null
         )
-        val result = userService.save(userInfo)
+        val result = userService.save(user)
         Assertions.assertEquals(result.id, 1L)
     }
 

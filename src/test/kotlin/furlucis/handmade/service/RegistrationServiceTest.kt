@@ -2,7 +2,6 @@ package furlucis.handmade.service
 
 import furlucis.handmade.HandmadeApplicationTests
 import furlucis.handmade.entity.UserCredentials
-import furlucis.handmade.entity.UserInfo
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.exceptions.*
 import furlucis.handmade.service.registration.RegistrationService
@@ -31,7 +30,7 @@ class RegistrationServiceTest @Autowired constructor(
         Assertions.assertEquals(result.username, completeRegistration.username)
         Assertions.assertEquals(result.password, completeRegistration.password)
         Assertions.assertEquals(result.email, completeRegistration.email)
-        Assertions.assertNotNull(result.userInfo)
+        Assertions.assertNotNull(result.user)
     }
 
     @Test

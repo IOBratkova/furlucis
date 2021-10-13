@@ -2,7 +2,7 @@ package furlucis.handmade
 
 import furlucis.handmade.entity.HandmadeTag
 import furlucis.handmade.entity.UserCredentials
-import furlucis.handmade.entity.UserInfo
+import furlucis.handmade.entity.User
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.repositories.HandmadeTagRepo
 import furlucis.handmade.repositories.UserCredentialsRepo
@@ -30,11 +30,12 @@ class HandmadeApplicationTests {
 	fun setData() {
 		createUserCredentials()
 		createUserInfo()
+		createHandmadeTag()
 	}
 
 	fun createUserInfo() {
 		var userCredentials = userCredentialsRepo.findById(1L).get()
-		var userInfo = UserInfo(
+		var user = User(
 			userCredentials.id,
 			userCredentials,
 			"Толя1",
@@ -46,11 +47,11 @@ class HandmadeApplicationTests {
 			Date(),
 			Date()
 		)
-		userCredentials.userInfo = userInfo
-		userInfoRepo.save(userInfo)
+		userCredentials.user = user
+		userInfoRepo.save(user)
 
 		userCredentials = userCredentialsRepo.findById(2L).get()
-		userInfo = UserInfo(
+		user = User(
 			userCredentials.id,
 			userCredentials,
 			"Толя2",
@@ -62,11 +63,11 @@ class HandmadeApplicationTests {
 			Date(),
 			Date()
 		)
-		userCredentials.userInfo = userInfo
-		userInfoRepo.save(userInfo)
+		userCredentials.user = user
+		userInfoRepo.save(user)
 
 		userCredentials = userCredentialsRepo.findById(3L).get()
-		userInfo = UserInfo(
+		user = User(
 			userCredentials.id,
 			userCredentials,
 			"Толя3",
@@ -78,8 +79,8 @@ class HandmadeApplicationTests {
 			Date(),
 			Date()
 		)
-		userCredentials.userInfo = userInfo
-		userInfoRepo.save(userInfo)
+		userCredentials.user = user
+		userInfoRepo.save(user)
 	}
 
 	fun createUserCredentials() {
@@ -119,6 +120,12 @@ class HandmadeApplicationTests {
 
 	fun createHandmadeTag() {
 		var tag = HandmadeTag(null, "ловец снов", "амулет", null)
+		handmadeTagRepo.save(tag)
 
+		tag = HandmadeTag(null, "вышивка крестом", "картина", null)
+		handmadeTagRepo.save(tag)
+
+		tag = HandmadeTag(null, "значок", "можно носить на одежде", null)
+		handmadeTagRepo.save(tag)
 	}
 }
