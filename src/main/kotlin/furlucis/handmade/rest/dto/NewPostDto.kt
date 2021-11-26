@@ -16,8 +16,8 @@ class NewPostDto (
     @JsonProperty("type")
     val type: String? = null,
 
-    @JsonProperty("userInfoId")
-    val userInfoId: Long? = null,
+    @JsonProperty("userId")
+    val userId: Long? = null,
 
     @JsonProperty("tags")
     val tags: List<HandmadeTagDto>? = null

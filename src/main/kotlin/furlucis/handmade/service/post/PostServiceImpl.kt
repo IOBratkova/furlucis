@@ -20,7 +20,7 @@ class PostServiceImpl @Autowired constructor(
         }
 
         override fun findAllByUserId(id: Long): List<Post> {
-                return postRepo.findAllByUserInfoId(id)
+                return postRepo.findAllByUserId(id)
         }
 
         override fun findById(id: Long) : Post {

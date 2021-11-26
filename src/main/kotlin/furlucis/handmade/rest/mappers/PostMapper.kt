@@ -9,10 +9,10 @@ import org.mapstruct.Mapping
 @Mapper(componentModel = "spring", uses = [UserMapper::class, HandmadeTagMapper::class])
 interface PostMapper {
 
-    @Mapping(source = "userInfo.id", target = "userInfoId")
+    @Mapping(source = "user.id", target = "userId")
     fun toPostDto(post: Post) : PostDto
 
-    @Mapping(target = "userInfo.id", source = "userInfoId")
+    @Mapping(target = "user.id", source = "userId")
     fun toPost(newPostDto: NewPostDto) : Post
 
     fun toListPostDto(posts: List<Post>) : List<PostDto>

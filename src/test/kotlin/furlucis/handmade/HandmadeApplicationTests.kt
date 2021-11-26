@@ -6,7 +6,7 @@ import furlucis.handmade.entity.User
 import furlucis.handmade.enums.RoleEnum
 import furlucis.handmade.repositories.HandmadeTagRepo
 import furlucis.handmade.repositories.UserCredentialsRepo
-import furlucis.handmade.repositories.UserInfoRepo
+import furlucis.handmade.repositories.UserRepo
 import org.junit.jupiter.api.BeforeAll
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -21,7 +21,7 @@ class HandmadeApplicationTests {
 	lateinit var userCredentialsRepo: UserCredentialsRepo
 
 	@Autowired
-	lateinit var userInfoRepo: UserInfoRepo
+	lateinit var userRepo: UserRepo
 
 	@Autowired
 	lateinit var handmadeTagRepo: HandmadeTagRepo
@@ -29,11 +29,11 @@ class HandmadeApplicationTests {
 	@BeforeAll
 	fun setData() {
 		createUserCredentials()
-		createUserInfo()
+		createUser()
 		createHandmadeTag()
 	}
 
-	fun createUserInfo() {
+	fun createUser() {
 		var userCredentials = userCredentialsRepo.findById(1L).get()
 		var user = User(
 			userCredentials.id,
@@ -48,7 +48,7 @@ class HandmadeApplicationTests {
 			Date()
 		)
 		userCredentials.user = user
-		userInfoRepo.save(user)
+		userRepo.save(user)
 
 		userCredentials = userCredentialsRepo.findById(2L).get()
 		user = User(
@@ -64,7 +64,7 @@ class HandmadeApplicationTests {
 			Date()
 		)
 		userCredentials.user = user
-		userInfoRepo.save(user)
+		userRepo.save(user)
 
 		userCredentials = userCredentialsRepo.findById(3L).get()
 		user = User(
@@ -80,7 +80,7 @@ class HandmadeApplicationTests {
 			Date()
 		)
 		userCredentials.user = user
-		userInfoRepo.save(user)
+		userRepo.save(user)
 	}
 
 	fun createUserCredentials() {

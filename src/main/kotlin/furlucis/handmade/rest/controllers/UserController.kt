@@ -2,7 +2,7 @@ package furlucis.handmade.rest.controllers
 
 import furlucis.handmade.rest.dto.AvatarDto
 import furlucis.handmade.rest.dto.IdentifierDto
-import furlucis.handmade.rest.dto.UserInfoDto
+import furlucis.handmade.rest.dto.UserDto
 import furlucis.handmade.rest.mappers.UserMapper
 import furlucis.handmade.service.image.ImageService
 import furlucis.handmade.service.user.UserService
@@ -19,10 +19,10 @@ class UserController @Autowired constructor(
 ) {
 
     @PostMapping("/save")
-    fun saveUserInfo(@RequestBody userInfoDto: UserInfoDto) : IdentifierDto<Long> {
-        val credentials = userService.findByUserCredentialsId(userInfoDto.userCredentialsId).userCredentials!!
-        val userInfo = userMapper.toUserInfo(userInfoDto, credentials)
-        return IdentifierDto(userService.save(userInfo).id!!)
+    fun saveUser(@RequestBody userDto: UserDto) : IdentifierDto<Long> {
+        val credentials = userService.findByUserCredentialsId(userDto.userCredentialsId).userCredentials!!
+        val user = userMapper.toUser(userDto, credentials)
+        return IdentifierDto(userService.save(user).id!!)
     }
 
     @PostMapping("/{userId}/avatar")

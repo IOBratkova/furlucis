@@ -17,7 +17,7 @@ class PostDto (
     @JsonProperty("type")
     val type: String,
 
-    @JsonProperty("userInfoId")
-    val userInfoId: Long
+    @JsonProperty("userId")
+    val userId: Long
 
 )

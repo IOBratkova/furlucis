@@ -7,6 +7,6 @@ import java.util.*
 
 
 @Repository
-interface UserInfoRepo : JpaRepository<User, Long> {
+interface UserRepo : JpaRepository<User, Long> {
     fun findByUserCredentialsId(id: Long) : Optional<User>
 }

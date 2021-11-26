@@ -2,7 +2,7 @@ package furlucis.handmade.rest.mappers
 
 import furlucis.handmade.entity.UserCredentials
 import furlucis.handmade.entity.User
-import furlucis.handmade.rest.dto.UserInfoDto
+import furlucis.handmade.rest.dto.UserDto
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.Mappings
@@ -11,22 +11,22 @@ import org.mapstruct.Mappings
 interface UserMapper {
 
     @Mapping(source = "userCredentialsId", target = "userCredentials.id")
-    fun toUserInfo(userInfoDto: UserInfoDto) : User
+    fun toUser(userDto: UserDto) : User
 
     @Mapping(source = "userCredentials.id", target = "userCredentialsId")
-    fun toUserInfoDto(user: User) : UserInfoDto
+    fun toUserDto(user: User) : UserDto
 
     @Mappings(
         Mapping(source = "userCredentials", target = "userCredentials"),
-        Mapping(source = "userInfoDto.firstName", target = "firstName"),
-        Mapping(source = "userInfoDto.secondName", target = "secondName"),
-        Mapping(source = "userInfoDto.patronymic", target = "patronymic"),
-        Mapping(source = "userInfoDto.description", target = "description"),
+        Mapping(source = "userDto.firstName", target = "firstName"),
+        Mapping(source = "userDto.secondName", target = "secondName"),
+        Mapping(source = "userDto.patronymic", target = "patronymic"),
+        Mapping(source = "userDto.description", target = "description"),
         Mapping(target = "avatar", ignore = true),
-        Mapping(source = "userCredentials.userInfo.id", target = "id")
+        Mapping(source = "userCredentials.user.id", target = "id")
     )
-    fun toUserInfo(userInfoDto: UserInfoDto, userCredentials: UserCredentials) : User
+    fun toUser(userDto: UserDto, userCredentials: UserCredentials) : User
 
-    fun toUserInfo(userCredentials: UserCredentials) : User
+    fun toUser(userCredentials: UserCredentials) : User
 
 }

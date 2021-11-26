@@ -2,7 +2,7 @@ package furlucis.handmade.rest.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-class UserInfoDto (
+class UserDto (
     @JsonProperty("firstName")
     val firstName: String?,
 
